@@ -1,0 +1,58 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script><div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Add Receptionist</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups validate" action="{% url 'Hospital:addreceptionistmodal' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                 
+                    
+
+                       {{form.as_p}}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Icon                        </label>
+                        <div class="col-sm-9">
+
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" 
+                                    data-trigger="fileinput">
+                                    <img src="http://placehold.it/256x256" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" 
+                                    style="max-width: 200px; max-height: 200px"></div>
+                                <div>
+                                    <span class="btn btn-white btn-file">
+                                        <span class="fileinput-new">Select Image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="usericon" accept="image/*">
+                                    </span>
+                                    <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">
+                                    Remove                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Save                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

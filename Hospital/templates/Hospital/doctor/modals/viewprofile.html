@@ -1,0 +1,76 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>
+<div class="profile-env">
+
+    <header class="row">
+
+        <div class="col-sm-3">
+
+            <a href="#" class="profile-picture">
+                <img src="{{patient.usericon.url}}" width="100" height="100" class="img-circle" />
+            </a>
+
+        </div>
+
+        <div class="col-sm-9">
+
+            <ul class="profile-info-sections">
+                <li style="padding:0px; margin:0px;">
+                    <div class="profile-name">
+                        <h3>{{patient.name}}</h3>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+
+    </header>
+
+    <section class="profile-info-tabs" style="background-color: #fff;">
+
+        <div class="row">
+
+            <div style="padding: 10px;">
+                <br>
+                <table class="table table-bordered">
+
+                                                <tr>
+                            <td>Email</td>
+                            <td><b>{{patient.user.email}}</b></td>
+                        </tr>
+                    
+                         
+                    
+                                                <tr>
+                            <td>Phone</td>
+                            <td><b>{{patient.user.phone}}</b></td>
+                        </tr>
+                    
+                                                <tr>
+                            <td>Sex</td>
+                            <td><b>{{patient.sex}}</b></td>
+                        </tr>
+                    
+
+                                                <tr>
+                            <td>Birth Date</td>
+                            <td><b>{{patient.dob}}</b></td>
+                        </tr>
+                    
+                         
+                    
+                                                <tr>
+                            <td>Blood Group</td>
+                            <td><b>{{patient.blood_group}}</b>
+                            </td>
+                        </tr>
+                    
+                </table>
+            </div>
+        </div>
+        
+    </section>
+
+</div>
+

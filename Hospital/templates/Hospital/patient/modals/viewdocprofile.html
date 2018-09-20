@@ -1,0 +1,31 @@
+{% load static %}
+<script src="/static/Hospital/assets/js/neon-custom-ajax.js"></script><script>$(".html5editor").wysihtml5();</script><div class="row" id="information_print">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+                
+            <div class="panel-body">
+                    
+                <b>Name :</b>
+                
+                <p>{{doctor.user.name}}</p>
+                    
+                
+                <b>Department :</b>
+                
+                <p>{{doctor.departmentname}}</p>
+                
+                <b>Phone :</b>
+                
+                <p>{{doctor.user.phone}}</p>
+                    
+                {% comment %} <b>Profile :</b>
+                
+                <p>Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                 {% endcomment %}
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>    <div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+        
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups validate" action="{% url 'Hospital:editdepartment' %}" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+
+                    <div class="form-group">
+                        
+                        <input type="hidden" name="did" value="{{department.id}}" /> 
+                        <label for="field-1" class="col-sm-3 control-label">Name</label>
+
+                        <div class="col-sm-7">
+                            <input type="text" name="departmentname" class="form-control" id="field-1" value="{{department.departmentname}}" required> 
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Description</label>
+
+                        <div class="col-sm-7">
+                             <textarea name="description" class="form-control" rows="5"
+                                id="field-ta">{{department.description}}</textarea> 
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label">
+                        Icon                        </label>
+                    <div class="col-sm-9">
+
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" 
+                                data-trigger="fileinput">
+                                <img src="{{department.depticon.url}}" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" 
+                                style="max-width: 200px; max-height: 200px"></div>
+                            <div>
+                                <span class="btn btn-white btn-file">
+                                    <span class="fileinput-new">Select Image</span>
+                                    <span class="fileinput-exists">Change</span>
+
+                                    {% comment %} request.POST['depticonDEXTMOVE']: {% endcomment %}
+                                    <input type="file" name="depticon" accept="image/*">
+                                </span>
+                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">
+                                Remove                                    </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Update                            </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,65 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script><div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Edit Appointment</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups" enctype="multipart/form-data"
+                    action="{% url 'Hospital:editappointment' %}" method="post">
+{% csrf_token %}
+                    <div class="form-group">
+                    <input type="hidden" name="did" value="{{appointment.id}}" /> 
+                        <label for="field-1" class="col-sm-3 control-label">Date</label>
+
+                        <div class="col-sm-7">
+                            <div class="date-and-time">
+                                 <input type="text" name="date" class="form-control datepicker" data-format="D, dd MM yyyy"
+                                       placeholder="Appointment Date" value="{{appointment.date}}" required>
+                                       {% comment %} {{ form.date }} {% endcomment %}
+                                <input type="text" name="time" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:05 AM" data-show-meridian="false" data-minute-step="5"  placeholder="time here">
+                                {% comment %} {{ form.time }} {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Patient</label>
+
+                        <div class="col-sm-7">
+                                {{ form.patient }}
+                            <!-- <select name="patient_id" class="select2" required>
+                                <option value="">Select Patient</option>
+                                                                        <option value="2">Tanvir Hasan</option>
+                                                            </select> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-7 col-sm-offset-3">
+                            <!-- <input type="checkbox" id="notify" name="notify" value="checked" checked> -->
+                            {{ form.notify }}
+                            <label class="control-label" for="notify">Notify Patient With SMS</label>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Update                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

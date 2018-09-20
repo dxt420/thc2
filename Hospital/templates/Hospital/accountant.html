@@ -1,0 +1,604 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="">
+
+<head>
+
+    <title>Accountant - TrueHealthcare</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="THc" />
+    <meta name="author" content="dxtsoft" />
+
+<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/entypo/css/entypo.css' %}">
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-core.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-forms.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/custom.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'Hospital/assets/css/skins/green.css' %}">-->
+
+    <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
+
+    <!--[if lt IE 9]><script src="{% static 'Hospital/assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %}"></script>
+<![endif]-->
+    <link rel="shortcut icon" href="{% static 'Hospital/uploads/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/vertical-timeline/css/component.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}">
+
+    <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
+
+    <!--[if lt IE 9]><script src="{% static 'Hospital/assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %}"></script>
+<![endif]-->
+    <link rel="shortcut icon" href="{% static 'Hospital/uploads/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/vertical-timeline/css/component.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}">
+
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js' %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js' %}"></script>
+<script src="script.js' %}"></script>-->
+
+    <script>
+        function checkDelete() {
+            var chk = confirm("Are You Sure To Delete This !");
+            if (chk) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+
+    <style>
+        .tile-stats .icon {
+            bottom: 30px;
+        }
+    </style>
+</head>
+
+<body class="page-body">
+    <div class="page-container">
+        <div class="sidebar-menu">
+            <header class="logo-env">
+
+                <!-- logo -->
+                <div class="logo" style="">
+                    <a href="#">
+                        <img src="{% static 'Hospital/uploads/logo.png' %}" style="max-height:83px;" />
+                    </a>
+                </div>
+
+                <!-- logo collapse icon -->
+                <div class="sidebar-collapse" style="">
+                    <a href="#" class="sidebar-collapse-icon with-animation">
+
+                        <i class="entypo-menu"></i>
+                    </a>
+                </div>
+
+                <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+                <div class="sidebar-mobile-menu visible-xs">
+                    <a href="#" class="with-animation">
+                        <i class="entypo-menu"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="sidebar-user-info">
+
+                <div class="sui-normal">
+                    <div class="user-link">
+                        <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;" height="44px" width="44px">
+
+                        <span>Welcome,</span>
+                        <strong>Dr. {{user.first_name}} </strong>
+                    </div>
+                </div>
+
+             
+             
+            </div>
+
+            <ul id="main-menu" class="">
+                <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+                <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+
+
+                <!-- DASHBOARD -->
+                <li class=" ">
+                    <a href="{% url 'Hospital:admindash' %}">
+                        <i class="fa fa-desktop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:department' %}">
+                        <i class="fa fa-sitemap"></i>
+                        <span>Department</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="{% url 'Hospital:doctor' %}">
+                        <i class="fa fa-user-md"></i>
+                        <span>Doctor</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:patient' %}">
+                        <i class="fa fa-user"></i>
+                        <span>Patient</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:nurse' %}">
+                        <i class="fa fa-plus-square"></i>
+                        <span>Nurse</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:pharmacist' %}">
+                        <i class="fa fa-medkit"></i>
+                        <span>Pharmacist</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:labaratorist' %}">
+                        <i class="fa fa-user"></i>
+                        <span>Laboratorist</span>
+                    </a>
+                </li>
+
+                <li class="active ">
+                    <a href="{% url 'Hospital:accountant' %}">
+                        <i class="fa fa-money"></i>
+                        <span>Accountant</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="{% url 'Hospital:receptionist' %}">
+                        <i class="fa fa-plus-square"></i>
+                        <span>Receptionist</span>
+                    </a>
+                </li>
+
+                <li class=" ">
+                    <a href="#">
+                        <i class="fa fa-sun-o"></i>
+                        <span>Monitor Hospital</span>
+                    </a>
+                    <ul>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:paymenthistory' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Payment History</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:bedallotment' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Bed Allotment</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:bloodbank' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Blood Bank</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:blooddonor' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Blood Donor</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:medicine' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Medicine</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:operationreport' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Operation Report</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:birthreport' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Birth Report</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:deathreport' %}">
+                                <i class="entypo-dot"></i>
+                                <span>Death Report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#">
+                        <i class="entypo-tag"></i>
+                        <span>Payroll</span>
+                    </a>
+                    <ul>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:createpayroll' %}">
+                                <span>
+                                    <i class="entypo-dot"></i> Create Payroll</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:payrolllist' %}">
+                                <span>
+                                    <i class="entypo-dot"></i> Payroll List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+             
+
+                
+                
+
+                <!-- ACCOUNT -->
+                {% comment %} <li class=" ">
+                    <a href="{% url 'Hospital:manageprofile' %}">
+                        <i class="fa fa-user"></i>
+                        <span>Account</span>
+                    </a>
+                </li> {% endcomment %}
+
+
+
+            </ul>
+
+        </div>
+        <div class="main-content">
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 clearfix" style="text-align:center;">
+                    <h2 style="font-weight:200; margin:0px;">TrueHealthcare</h2>
+                </div>
+
+                <!-- Raw Links -->
+                <div class="col-md-12 col-sm-12 clearfix ">
+
+                    <ul class="list-inline links-list pull-left">
+                        <!-- Language Selector -->
+                        <li class="dropdown language-selector">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                                <i class="entypo-user"></i> Administrator</a>
+                        </li>
+
+                        <!-- Message Notifications -->
+                    </ul>
+
+
+                    <ul class="list-inline links-list pull-right">
+
+
+
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                Logout &nbsp;
+                                <i class="fa fa-sign-out"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr style="margin-top:0px;" />
+            <h3 style="margin:20px 0px; color:#818da1; font-weight:200;">
+                <i class="entypo-right-circled"></i>
+                Accountant </h3>
+
+            <button onclick="showAjaxModal_add();" class="btn btn-primary pull-right">
+                <i class="fa fa-plus"></i>&nbsp;Add Accountant</button>
+            <div style="clear:both;"></div>
+            <br>
+            <table class="table table-bordered table-striped datatable" id="table-2">
+                <thead>
+                    <tr>
+                        <th width="10%">Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th width="20%">Options</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for accountant in accountants %}
+                    <tr>
+                        <td>
+                            <img src="{{accountant.usericon.url}}" class="img-circle" width="100" height="100">
+                        </td>
+                        <td>{{accountant.name}}</td>
+                        <td>{{accountant.email}}</td>
+                  
+                        <td>{{accountant.phone}}</td>
+                        <td>
+                            <a onclick="showAjaxModal_edit('{{accountant.id}}');" class="btn btn-info btn-sm">
+                                <i class="fa fa-pencil"></i>&nbsp; Edit </a>
+                            <a onclick="confirm_modal('{{accountant.id}}')" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash-o"></i>&nbsp; Delete </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <script type="text/javascript">
+                jQuery(window).load(function () {
+                    var $ = jQuery;
+
+                    $("#table-2").dataTable({
+                        "sPaginationType": "bootstrap",
+                        "sDom": "<'row'<'col-xs-3 col-left'l><'col-xs-9 col-right'<'export-data'T>f>r>t<'row'<'col-xs-3 col-left'i><'col-xs-9 col-right'p>>"
+                    });
+
+                    $(".dataTables_wrapper select").select2({
+                        minimumResultsForSearch: -1
+                    });
+
+                    // Highlighted rows
+                    $("#table-2 tbody input[type=checkbox]").each(function (i, el) {
+                        var $this = $(el),
+                            $p = $this.closest('tr');
+
+                        $(el).on('change', function () {
+                            var is_checked = $this.is(':checked');
+
+                            $p[is_checked ? 'addClass' : 'removeClass']('highlight');
+                        });
+                    });
+
+                    // Replace Checboxes
+                    $(".pagination a").click(function (ev) {
+                        replaceCheckboxes();
+                    });
+                });
+            </script>
+            <!-- Footer -->
+            <footer class="main">
+                &copy; 2018
+                <strong>TrueHealthcare</strong>
+
+
+
+
+            </footer>
+
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function showAjaxModal_add() {
+            var urlx = "{% url 'Hospital:addaccountantmodal' %}";
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height: 25px; " /></div>');
+
+            // LOADING THE AJAX MODAL
+            jQuery('#modal_ajax').modal('show', { backdrop: 'true' });
+
+            // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+            $.ajax({
+                url: urlx,
+                success: function (response) {
+                    jQuery('#modal_ajax .modal-body').html(response);
+                }
+            });
+        }
+        function showAjaxModal_edit(a) {
+            var urlx = "{% url 'Hospital:editaccountantmodal' 123 %}"; 
+            var urly = urlx.replace('123',a);
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal_ajax .modal-body').html(
+                '<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height:25px;" /></div>'
+            );
+
+            // LOADING THE AJAX MODAL
+            jQuery('#modal_ajax').modal('show', {
+                backdrop: 'true'
+            });
+
+            // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+            $.ajax({
+                url: urly,
+                success: function (response) {
+                    jQuery('#modal_ajax .modal-body').html(response);
+                }
+            });
+        }
+    </script>
+
+    <!-- (Ajax Modal)-->
+    <div class="modal fade" id="modal_ajax">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">TrueHealthcare</h4>
+                </div>
+
+                <div class="modal-body" style="height:500px; overflow:auto;">
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        function confirm_modal(delete_url) {
+            jQuery('#modal-4').modal('show', { backdrop: 'static' });
+            var urlx = "{% url 'Hospital:deleteaccountant' 123 %}"; 
+            var urly = urlx.replace('123',delete_url);
+            document.getElementById('delete_link').setAttribute('href', urly);
+        }
+    </script>
+
+    <!-- (Normal Modal)-->
+    <div class="modal fade" id="modal-4">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top:100px;">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="text-align:center;">Are you sure to delete this information ?</h4>
+                </div>
+
+
+                <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+                    <a href="#" class="btn btn-danger" id="delete_link">Delete</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    custom width modal -->
+
+    <script type="text/javascript">
+        function showCustomWidthModal(url) {
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal-2 .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height: 25px; " /></div>');
+
+            // LOADING THE AJAX MODAL
+            jQuery('#modal-2').modal('show', { backdrop: 'true' });
+
+            // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+            $.ajax({
+                url: url,
+                success: function (response) {
+                    jQuery('#modal-2 .modal-body').html(response);
+                }
+            });
+        }
+    </script>
+
+    <div class="modal fade custom-width" id="modal-2">
+        <div class="modal-dialog" style="width: 75%;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">TrueHealthcare</h4>
+                </div>
+
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/daterangepicker/daterangepicker-bs3.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/selectboxit/jquery.selectBoxIt.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/wysihtml5/bootstrap-wysihtml5.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/selectboxit/jquery.selectBoxIt.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
+
+    <!-- Bottom Scripts -->
+    <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/joinable.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/resizeable.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/neon-api.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/bootstrap-switch.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/toastr.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/fullcalendar/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/bootstrap-timepicker.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/fileinput.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/wysihtml5/wysihtml5-0.4.0pre.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/wysihtml5/bootstrap-wysihtml5.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery.multi-select.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery.knob.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/selectboxit/jquery.selectBoxIt.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery.inputmask.bundle.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/daterangepicker/daterangepicker.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/dropzone/dropzone.css' %}">
+    <script src="{% static 'Hospital/assets/js/dropzone/dropzone.js' %}"></script>
+
+    <script src="{% static 'Hospital/assets/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/datatables/TableTools.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/datatables/jquery.dataTables.columnFilter.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/datatables/lodash.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/datatables/responsive/js/datatables.responsive.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/select2/select2.min.js' %}"></script>
+
+    <script src="{% static 'Hospital/assets/js/neon-calendar.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/neon-chat.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/neon-custom.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/neon-demo.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/neon-notes.js' %}"></script>
+    <script src="{% static 'Hospital/assets/js/jquery.form.js' %}"></script>
+
+    <script src="{% static 'Hospital/assets/js/ajax-form-submission.js' %}"></script>
+
+    <script>
+        $(".html5editor").wysihtml5();
+    </script>
+
+</body>
+
+</html>

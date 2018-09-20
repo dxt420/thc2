@@ -1,0 +1,80 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>    <div id="prescription_print">
+    <table width="100%" border="0">
+        <tr>
+            <td align="left" valign="top">
+                                        Patient Name: Tanvir Hasan<br>
+                    Age: 27<br>
+                    Sex: male<br>
+                                </td>
+            <td align="right" valign="top">
+                Doctor Name: Micheal Pewd<br>
+                Date: 16 Nov, 2018<br>
+                Time: 11:10<br>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-primary" data-collapsed="0">
+
+                <div class="panel-body">
+
+                    <b>Case History :</b>
+                    
+                    <p>Some case history</p>
+                    
+                    <hr>
+                        
+                    <b>Medication :</b>
+                    
+                    <p>Some medication</p>
+                    
+                    <hr>
+                    
+                    <b>Note :</b>
+                    
+                    <p>Some notes</p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+
+<a onClick="PrintElem('#prescription_print')" class="btn btn-primary hidden-print">
+    <i class="fa fa-print"></i>&nbsp;
+    Print    </a>
+
+
+
+
+<script type="text/javascript">
+
+function PrintElem(elem)
+{
+    Popup($(elem).html());
+}
+
+function Popup(data)
+{
+    var mywindow = window.open('', 'prescription', 'height=400,width=600');
+    mywindow.document.write('<html><head><title>Invoice</title>');
+    mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-theme.css' %}" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}" type="text/css" />');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
+</script>

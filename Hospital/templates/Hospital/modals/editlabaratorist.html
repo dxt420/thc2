@@ -1,0 +1,94 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script><div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+           
+
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups validate" action="{% url 'Hospital:editlabaratorist' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                    <input type="hidden" name="did" value="{{labaratorist.id}}" /> 
+                        <label for="field-1" class="col-sm-3 control-label">First Name</label>
+
+                        <div class="col-sm-7">
+                        <input type="text" name="first_name" class="form-control" id="field-1" value="{{labaratorist.first_name}}" required>
+                             
+                            
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                   
+                        <label for="field-1" class="col-sm-3 control-label">Last Name</label>
+
+                        <div class="col-sm-7">
+                        <input type="text" name="last_name" class="form-control" id="field-1" value="{{labaratorist.last_name}}" required>
+                             
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Email</label>
+
+                        <div class="col-sm-7">
+                        <input type="email" name="email" class="form-control" id="field-1" value="{{labaratorist.email}}" required>
+                              
+                          
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                            <label for="field-ta" class="col-sm-3 control-label">Phone</label>
+    
+                            <div class="col-sm-7">
+                            <input type="text" name="phone" class="form-control" id="field-1" value="{{labaratorist.phone}}" >
+                                    
+                              
+                            </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Icon                        </label>
+                        <div class="col-sm-9">
+
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;" 
+                                    data-trigger="fileinput">
+                                    <img src="{{labaratorist.usericon.url}}" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" 
+                                    style="max-width: 200px; max-height: 200px"></div>
+                                <div>
+                                    <span class="btn btn-white btn-file">
+                                        <span class="fileinput-new">Select Image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="usericon" accept="image/*">
+                                    </span>
+                                    <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">
+                                    Remove                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Update                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

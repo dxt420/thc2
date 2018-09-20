@@ -1,0 +1,158 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>    <div id="payroll_print">
+    <table width="100%" border="0">
+        <tr>
+            <td width="50%"><img src="uploads/logo.png" style="max-height:80px;"></td>
+            <td align="right">
+                <h4>Payroll Code : c44c3ab</h4>
+                <h5>Employee : Micheal Pewd</h5>
+                <h5>Account Type : Doctor</h5>
+                <h5>Date : March, 2018</h5>
+                <h5>
+                    Status :
+                    Unpaid                    </h5>
+            </td>
+        </tr>
+    </table>
+    
+    <hr><br>
+    <h4 style="text-align: center;">Allowance Summary</h4>
+                <table class="table table-bordered" width="100%" border="1" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th width="60%">Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <div>
+                                                <tr>
+                            <td class="text-center">1</td>
+                            <td>
+                                allowance 1                                </td>
+                            <td class="text-right">
+                                100                                </td>
+                        </tr>
+                                                <tr>
+                            <td class="text-center">2</td>
+                            <td>
+                                allowance2                                </td>
+                            <td class="text-right">
+                                50                                </td>
+                        </tr>
+                                        </div>
+            </tbody>
+        </table>
+            
+    <br>
+    <h4 style="text-align: center;">Deduction Summary</h4>
+                <table class="table table-bordered" width="100%" border="1" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th width="60%">Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <div>
+                                        <tr>
+                        <td class="text-center">1</td>
+                        <td>
+                            deduction1                            </td>
+                        <td class="text-right">
+                            10                            </td>
+                    </tr>
+                                        <tr>
+                        <td class="text-center">2</td>
+                        <td>
+                            deduction2                            </td>
+                        <td class="text-right">
+                            20                            </td>
+                    </tr>
+                                </div>
+            </tbody>
+        </table>
+            
+    <br>
+    <h3 style="text-align: center; margin-bottom: 0px;">Payroll Summary</h3>
+    <center><hr style="margin: 5px 0px 5px 0px; width: 50%;"></center>
+    <center>
+        <table>
+            <tr>
+                <td style="font-weight: 600; font-size: 15px; color: #000;">
+                    Basic Salary</td>
+                <td style="font-weight: 600; font-size: 15px; color: #000; width: 15%;
+                    text-align: center;"> : </td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    text-align: right;">750</td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600; font-size: 15px; color: #000;">
+                    Total Allowance</td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    width: 15%; text-align: center;"> : </td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    text-align: right;">150</td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600; font-size: 15px; color: #000;">
+                    Total Deduction</td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    width: 15%; text-align: center;"> : </td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    text-align: right;">30</td>
+            </tr>
+            <tr>
+                <td colspan="3"><hr style="margin: 5px 0px;"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600; font-size: 15px; color: #000;">
+                    Net Salary</td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    width: 15%; text-align: center;"> : </td>
+                <td style="font-weight: 600; font-size: 15px; color: #000;
+                    text-align: right;">
+                    870                    </td>
+            </tr>
+        </table>
+    </center>
+    <br>
+</div>
+
+<a onClick="PrintElem('#payroll_print')" class="btn btn-primary hidden-print">
+    <i class="fa fa-print"></i>&nbsp;
+    Print Payroll Details    </a>
+
+
+
+
+
+
+<script type="text/javascript">
+
+function PrintElem(elem)
+{
+    Popup($(elem).html());
+}
+
+function Popup(data)
+{
+    var mywindow = window.open('', 'payroll', 'height=400,width=600');
+    mywindow.document.write('<html><head><title>Payroll Details</title>');
+    mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-theme.css' %}" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}" type="text/css" />');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
+</script>

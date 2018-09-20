@@ -1,0 +1,154 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script><table class="table table-bordered table-striped dataTable" id="table-2">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Report Type</th>
+            <th>Document Type</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+           {% for diag in diags %}
+            <tr>
+                <td>{{diag.date}} -  {{diag.time}}</td>
+                <td>{{diag.report_type}}</td>
+                <td>{{diag.doc_type}}</td>
+                <td>{{diag.description}}</td>
+                <td>
+                    <a href="http://creativeitem.com/demo/bayanno/uploads/diagnosis_report/AdmitCard_FAOQEG.pdf" class="btn btn-info">
+                        <i class="fa fa-download"></i>
+                    </a>
+                                        <a onclick="confirm_modal('http://creativeitem.com/demo/bayanno/index.php?doctor/diagnosis_report/delete/1')"
+                        class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash-o"></i>
+                    </a>
+                                    </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+</table>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Add Diagnosis Report</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups" action="{% url 'Hospital:viewdiagnosisreportDD'  %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-3 control-label">Date</label>
+
+                        <div class="col-sm-7">
+                            <div class="date-and-time">
+                                <input type="text" name="date" class="form-control datepicker" data-format="D, dd MM yyyy" placeholder="date here">
+                                <input type="text" name="time" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="00:05 AM" data-show-meridian="false" data-minute-step="5"  placeholder="time here">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Report Type</label>
+
+                        <div class="col-sm-7">
+                            <select name="report_type" class="form-control">
+                                <option value="">Select Report Type</option>
+                                <option value="xray">Xray</option>
+                                <option value="blood_test">Blood Test</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Document</label>
+
+                        <div class="col-sm-7">
+
+                            <input type="file" name="file_name" class="form-control file2 inline btn btn-primary" data-label="<i class='glyphicon glyphicon-file'></i> Browse" />
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Document Type</label>
+
+                        <div class="col-sm-7">
+                            <select name="doc_type" class="form-control">
+                                <option value="">Select Document Type</option>
+                                <option value="image">Image</option>
+                                <option value="doc">Doc</option>
+                                <option value="pdf">Pdf</option>
+                                <option value="excel">Excel</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Description</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="description" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="prescription_id" value="1">
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Save                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(window).load(function ()
+    {
+        var $ = jQuery;
+
+        $("#table-2").dataTable({
+            "sPaginationType": "bootstrap",
+            "sDom": "<'row'<'col-xs-3 col-left'l><'col-xs-9 col-right'<'export-data'T>f>r>t<'row'<'col-xs-3 col-left'i><'col-xs-9 col-right'p>>"
+        });
+
+        $(".dataTables_wrapper select").select2({
+            minimumResultsForSearch: -1
+        });
+
+        // Highlighted rows
+        $("#table-2 tbody input[type=checkbox]").each(function (i, el)
+        {
+            var $this = $(el),
+                    $p = $this.closest('tr');
+
+            $(el).on('change', function ()
+            {
+                var is_checked = $this.is(':checked');
+
+                $p[is_checked ? 'addClass' : 'removeClass']('highlight');
+            });
+        });
+
+        // Replace Checboxes
+        $(".pagination a").click(function (ev)
+        {
+            replaceCheckboxes();
+        });
+    });
+</script>

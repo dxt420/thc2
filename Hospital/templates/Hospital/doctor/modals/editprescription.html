@@ -1,0 +1,89 @@
+{% load static %}
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script><div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Edit Prescription</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form role="form" class="form-horizontal form-groups" action="{% url 'Hospital:editprescription' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input type="hidden" name="did" value="{{prescription.id}}" /> 
+                        <label for="field-1" class="col-sm-3 control-label">Date</label>
+
+                        <div class="col-sm-7">
+                            <div class="date-and-time">
+                                <input type="text" name="date" class="form-control datepicker"
+                                       data-format="D, dd MM yyyy" value="{{prescription.date}}"
+                                        placeholder="Date" required> 
+                                        
+                                
+                                <input type="text" name="time" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:05 AM" data-show-meridian="false" data-minute-step="5"  placeholder="time here">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Patient</label>
+
+                        <div class="col-sm-7">
+                            <!-- <select name="patient" class="select2" required>
+                                <option value="">Select Patient</option>
+                                                                        <option value="2">Tanvir Hasan</option>
+                                                            </select> -->
+                                                            {{form.patient}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Case History</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="case_history" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            {{prescription.case_history}}
+                            </textarea> 
+                            {% comment %} {{form.case_history}} {% endcomment %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Medication</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="medication" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            {{prescription.medication}}
+                            </textarea>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="field-ta" class="col-sm-3 control-label">Note</label>
+
+                        <div class="col-sm-9">
+                            <textarea name="note" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            {{prescription.note}}
+                            </textarea> 
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 control-label col-sm-offset-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Update                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -11,7 +11,7 @@ from django.contrib import messages, auth
 
 from . decorators import *
 from . forms import CustomUserCreationForm, addPatientForm, addDepartmentForm, addDoctorForm, addAccountantForm, addNurseForm, addPharmacistForm, addLabaratoristForm, addReceptionistForm, addAppointmentForm, addInvoiceForm, addBloodDonorForm, createPayrollForm, addBedForm, addBedAllotmentForm, addPrescriptionForm, CustomUserCreationFormDoctor, CustomUserCreationFormNurse, CustomUserCreationFormPatient,CustomUserCreationFormReception,CustomUserCreationFormLabaratorist,CustomUserCreationFormAccountant,CustomUserCreationFormPharmacist,applyAppointmentForm,MessageForm
-from . models import Patient, Department, Doctor, PaymentHistory, BedAllotment, BloodBank, Medicine, Appointment, Invoice, BloodDonor, Payroll, Bed, Prescription, CustomUser, Role,RequestedAppointment,Employee,DiagnosisReport,Message
+from . models import Patient, Department, Doctor, PaymentHistory, BedAllotment, BloodBank, Medicine, Appointment, Invoice, BloodDonor, Payroll, Bed, Prescription, CustomUser, RequestedAppointment,Employee,DiagnosisReport,Message
 
 @login_required
 def home(request):
@@ -184,6 +184,8 @@ def createpayroll(request):
                 status=request.POST['status'],)
 
             new_payroll.save()
+            messages.success(request, "aa")
+            request.session['foo'] = 2
             return HttpResponseRedirect(reverse('Hospital:payrolllist'))
 
     else:
@@ -209,7 +211,8 @@ def markpaid(request,id):
         mark_paid_object.status = 'unpaid'
         mark_paid_object.save()
 
-
+    messages.success(request, "aa")
+    request.session['foo'] = 4
     return HttpResponseRedirect(reverse('Hospital:payrolllist'))
 
 @login_required
@@ -222,6 +225,8 @@ def markunpaid(request,id):
         mark_paid_object.status = 'paid'
         mark_paid_object.save()
         
+    messages.success(request, "aa")
+    request.session['foo'] = 4
     return HttpResponseRedirect(reverse('Hospital:payrolllist'))
     
 
@@ -315,7 +320,7 @@ def addpatientmodal(request):
     if request.method == 'POST':
         form = CustomUserCreationFormPatient(request.POST)
 
-        if True:
+        if form.is_valid():
             patient = form.save()
 
             patient.blood_group = request.POST['blood_group']
@@ -328,6 +333,12 @@ def addpatientmodal(request):
             user = patient.user
             user.usericon = request.FILES['usericon']
             user.save()
+            messages.error(request, "Error in details")
+            request.session['foo'] = 2
+            return HttpResponseRedirect(reverse('Hospital:patient'))
+        else:
+            messages.error(request, "Error in details")
+            request.session['foo'] = 1
             return HttpResponseRedirect(reverse('Hospital:patient'))
 
     else:
@@ -384,9 +395,11 @@ def editappointment(request):
         appointment = Appointment.objects.get(pk=app_id)
         appointment.date = request.POST['date']
         appointment.time = request.POST['time']
-        appointment.patient = request.POST['patient']
+        appointment.patient = get_object_or_404(Patient, pk=request.POST['patient'])
         appointment.notify = request.POST['notify']
         appointment.save()
+        messages.success(request, "a")
+        request.session['foo'] = 4
         return HttpResponseRedirect(reverse('Hospital:appointmentD'))
 
 
@@ -495,19 +508,41 @@ def editpatientD(request):
 
 def deletedepartment(request, id):
     dept = get_object_or_404(Department, pk=id).delete()
+    messages.success(request, "a")
+    request.session['foo'] = 3
     return HttpResponseRedirect(reverse('Hospital:department'))
+
+def deletebed(request, id):
+    bed = get_object_or_404(Bed, pk=id).delete()
+    messages.success(request, "a")
+    request.session['foo'] = 3
+    return HttpResponseRedirect(reverse('Hospital:bed'))
+
 
 def deleteappointment(request, id):
     get_object_or_404(Appointment, pk=id).delete()
+    messages.success(request, "d")
+    request.session['foo'] = 3
     return HttpResponseRedirect(reverse('Hospital:appointmentD'))
+
+def deleteappointmentrequest(request, id):
+    get_object_or_404(RequestedAppointment, pk=id).delete()
+    messages.success(request, "d")
+    request.session['foo'] = 3
+    return HttpResponseRedirect(reverse('Hospital:appointmentrequestD'))
+    
 
 def deletedoctor(request, id):
     doc = get_object_or_404(Doctor, pk=id).delete()
+    messages.success(request, "a")
+    request.session['foo'] = 3
     return HttpResponseRedirect(reverse('Hospital:doctor'))
 
 
 def deletepatient(request, id):
     get_object_or_404(CustomUser, pk=id).delete()
+    messages.error(request, "Error in details")
+    request.session['foo'] = 3
     if request.user.is_doctor and request.user.is_admin:
         return HttpResponseRedirect(reverse('Hospital:patient'))
     if request.user.is_doctor:
@@ -515,6 +550,8 @@ def deletepatient(request, id):
 
 def deleteprescription(request, id):
     get_object_or_404(Prescription, pk=id).delete()
+    messages.success(request, "a")
+    request.session['foo'] = 3
     return HttpResponseRedirect(reverse('Hospital:prescriptionD'))
 
 def deletenurse(request, id):
@@ -551,6 +588,8 @@ def editdepartment(request):
         if request.FILES:
             department.depticon = request.FILES['depticon']
             department.save()
+        messages.success(request, "aa")
+        request.session['foo'] = 4
         return HttpResponseRedirect(reverse('Hospital:department'))
 
     return render(request, 'Hospital/modals/edit_department.html', {'department': department})
@@ -574,6 +613,30 @@ def editdoctormodal(request, doc_id):
     return render(request, 'Hospital/modals/editdoctor.html', context)
 
 
+def editbedmodal(request, bed_id):
+
+    bed = Bed.objects.get(pk=bed_id)
+    form = addBedForm(initial = {'departmentname':doctor.departmentname})
+    
+    context = {
+        'bed': bed,
+        'form': form
+    }
+
+    return render(request, 'Hospital/nurse/modals/editbed.html', context)
+
+
+def editbed(request):
+    if request.method == 'POST':
+           bed_id = request.POST.get('did', None)
+           bed = Bed.objects.get(pk=bed_id)
+           bed.bed_number=request.POST['number'],
+           bed.bed_type=request.POST['bed_type'],
+           bed.description=request.POST['description']
+
+           bed.save()
+           return HttpResponseRedirect(reverse('Hospital:bed'))
+
 def editdoctor(request):
     if request.method == 'POST':
 
@@ -590,6 +653,8 @@ def editdoctor(request):
         if request.FILES:
             doctor.docicon = request.FILES['usericon']
             doctor.save()
+        messages.success(request, "aa")
+        request.session['foo'] = 4
         return HttpResponseRedirect(reverse('Hospital:doctor'))
 
     return render(request, 'Hospital/modals/editdoctor.html', {'doctor': doctor})
@@ -684,6 +749,7 @@ def editpharmacist(request):
 
 def adddepartmentmodal(request):
     form = addDepartmentForm(request.POST or None, request.FILES or None)
+
     if request.method == 'POST':
         if form.is_valid():
             new_dept = Department(
@@ -693,14 +759,17 @@ def adddepartmentmodal(request):
             if request.FILES:
                 new_dept.depticon=request.FILES['depticon']
                 new_dept.save()
-            
-         
+           
+            messages.success(request, "a")
+            request.session['foo'] = 2
             return HttpResponseRedirect(reverse('Hospital:department'))
-        else:
-            return HttpResponseRedirect(reverse('Hospital:adddepartmentmodal'))
-    else:
-        context = {'form': form}
-        return render(request, 'Hospital/modals/add_department.html', context)
+        # else:
+        #     messages.error(request, "Error in details")
+        #     request.session['foo'] = 1
+        #     return HttpResponseRedirect(reverse('Hospital:department'))
+
+    context = {'form': form}
+    return render(request, 'Hospital/newdept.html', context)
 
 
 def adddoctormodal(request):
@@ -711,21 +780,26 @@ def adddoctormodal(request):
         if form.is_valid():
             doctor = form.save()
             doctor.departmentname = request.POST['departmentname']
-            doctor.usericon = request.FILES['usericon']
-            user = doctor.user
-            user.usericon = request.FILES['usericon']
-            user.save()
             doctor.save()
-            user = doctor.user
-            user.usericon = request.FILES['usericon']
-            user.save()
+            if request.FILES:
+                doctor.usericon = request.FILES['usericon']
+                doctor.save()
+                user = doctor.user
+                user.usericon = request.FILES['usericon']
+                user.save()
+         
+           
+            messages.success(request, "Successfully added")
+            request.session['foo'] = 2
             return HttpResponseRedirect(reverse('Hospital:doctor'))
         else:
-            context = {'form': form}
-            return render(request, 'Hospital/modals/add_doctor.html', context)
-    else:
-        context = {'form': form}
-        return render(request, 'Hospital/modals/add_doctor.html', context)
+            messages.error(request, "Error in details")
+            request.session['foo'] = 1
+            return HttpResponseRedirect(reverse('Hospital:doctor'))
+            
+    
+    context = {'form': form}
+    return render(request, 'Hospital/modals/add_doctor.html', context)
 
 
 
@@ -735,8 +809,9 @@ def addnursemodal(request):
 
         if True:
             user = form.save()
-            user.usericon = request.FILES['usericon']
-            user.save()
+            if request.FILES:
+                user.usericon = request.FILES['usericon']
+                user.save()
             user.phone = request.POST['phone']
             user.save()
             return HttpResponseRedirect(reverse('Hospital:nurse'))
@@ -934,11 +1009,13 @@ def editprescription(request):
         prescription = Prescription.objects.get(pk=pre_id)
         prescription.date = request.POST['date']
         
-        prescription.patient = request.POST['patient']
+        prescription.patient = get_object_or_404(Patient, pk=request.POST['patient'])
         prescription.case_history = request.POST['case_history']
         prescription.medication = request.POST['medication']
         prescription.note = request.POST['note']
         prescription.save()
+        messages.success(request, "aa")
+        request.session['foo'] = 4
         return HttpResponseRedirect(reverse('Hospital:prescriptionD'))
   
     
@@ -997,15 +1074,22 @@ def pmnewD(request):
             return render(request, 'Hospital/patient/pm_new.html',context)
 
 def pmD(request):
-    dms = Message.objects.filter(receiver=request.user)
+    # get the conversations the user is in
+    conversations = Message.objects.filter(conversation__participants=request.user).order_by('-date')
+    dms = conversations.values('conversation').annotate(
+        first_msg=Max('conversation__message')
+    )
 
     a = 0
-    for dm in dms:
-        if not dm.is_read:
+    for conversation in conversations:
+        if not conversation.is_read:
             a = a + 1
          
 
     context = {'dms':dms,'a':a}
+
+
+
     return render(request, 'Hospital/doctor/pm.html',context)
 
 def pmDd(request,id):
@@ -1064,6 +1148,8 @@ def addappointmentD(request):
                 doctor=Doctor.objects.get(pk=request.user.id))
 
             new_appointment.save()
+            messages.success(request, "d")
+            request.session['foo'] = 2
             return HttpResponseRedirect(reverse('Hospital:appointmentD'))
 
     else:
@@ -1133,6 +1219,8 @@ def addprescriptionD(request):
                 note=request.POST['note'])
 
             new_prescription.save()
+            messages.success(request, "aa")
+            request.session['foo'] = 2
             return HttpResponseRedirect(reverse('Hospital:prescriptionD'))
 
     else:
@@ -1468,6 +1556,8 @@ def applyappointment(request):
                     doctor=Doctor.objects.get(pk=request.POST['doctor']))
 
                 new_appointment.save()
+                messages.error(request, "Error in details")
+                request.session['foo'] = 2
                 return HttpResponseRedirect(reverse('Hospital:pendingappointment'))
 
     else:
@@ -1486,7 +1576,86 @@ def viewdocprofile(request, id):
     return render(request, 'Hospital/patient/modals/viewdocprofile.html', context)
 
 
+
+
    
+def newdept(request):
+    return render(request, 'Hospital/newdept.html')
+
+
+def newpat(request):
+    form = CustomUserCreationFormPatient(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            patient = form.save()
+
+            patient.blood_group = request.POST['blood_group']
+            patient.sex = request.POST['sex']
+            patient.dob = request.POST['dob']
+
+            patient.save()
+            patient.usericon = request.FILES['usericon']
+            patient.save()
+            user = patient.user
+            user.usericon = request.FILES['usericon']
+            user.save()
+            messages.error(request, "Error in details")
+            request.session['foo'] = 2
+            if request.user.is_doctor:
+                return HttpResponseRedirect(reverse('Hospital:patientD'))
+            if request.user.is_nurse:
+                return HttpResponseRedirect(reverse('Hospital:patientN'))
+            if request.user.is_admin:
+                return HttpResponseRedirect(reverse('Hospital:patient'))
+        else:
+            messages.error(request, "Error in details")
+            request.session['foo'] = 1
+            context = {'form': form}
+            if request.user.is_doctor:
+                return render(request, 'Hospital/doctor/newpat.html',context)
+            if request.user.is_nurse:
+                return render(request, 'Hospital/nurse/newpat.html',context)
+            if request.user.is_admin:
+                return render(request, 'Hospital/newpat.html',context)
+            
+
+    else:
+        context = {'form': form}
+        if request.user.is_doctor:
+            return render(request, 'Hospital/doctor/newpat.html',context)
+        if request.user.is_nurse:
+            return render(request, 'Hospital/nurse/newpat.html',context)
+        if request.user.is_admin:
+            return render(request, 'Hospital/newpat.html',context)
+
+   
+def newdoc(request):
+    form = CustomUserCreationFormDoctor(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        
+
+        if form.is_valid():
+            doctor = form.save()
+            doctor.departmentname = request.POST['departmentname']
+            doctor.save()
+            if request.FILES:
+                doctor.usericon = request.FILES['usericon']
+                doctor.save()
+                user = doctor.user
+                user.usericon = request.FILES['usericon']
+                user.save()
+         
+           
+            messages.success(request, "Successfully added")
+            request.session['foo'] = 2
+            return HttpResponseRedirect(reverse('Hospital:doctor'))
+        else:
+            context = {'form': form}
+            return render(request, 'Hospital/newdoc.html',context)
+
+    else:
+        context = {'form': form}
+        return render(request, 'Hospital/newdoc.html',context)
 
    
     

@@ -12,7 +12,7 @@
     <meta name="description" content="THc" />
     <meta name="author" content="dxtsoft" />
 
-<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
 
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/entypo/css/entypo.css' %}">
@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-theme.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-forms.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/custom.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/magnific-popup.css' %}">
+
+
+
     <!--<link rel="stylesheet" href="{% static 'Hospital/assets/css/skins/green.css' %}">-->
 
     <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
@@ -38,7 +44,27 @@
     <link rel="shortcut icon" href="{% static 'Hospital/uploads/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
 
-<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/vertical-timeline/css/component.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}">
+
+    <!--<link rel="stylesheet" href="{% static 'Hospital/assets/css/skins/green.css' %}">-->
+
+    <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
+
+    <!--[if lt IE 9]><script src="{% static 'Hospital/assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %}"></script>
+<![endif]-->
+    <link rel="shortcut icon" href="{% static 'Hospital/uploads/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
+
+
 
 
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/vertical-timeline/css/component.css' %}">
@@ -67,6 +93,14 @@
 </head>
 
 <body class="page-body">
+    
+      
+
+    <div class="preloader">
+        <div class="preloaderIn">
+            <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+        </div>
+    </div>
     <div class="page-container             ">
         <div class="sidebar-menu">
             <header class="logo-env">
@@ -97,15 +131,15 @@
 
                 <div class="sui-normal">
                     <div class="user-link">
-                        <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;" height="44px" width="44px">
+                        <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;">
 
                         <span>Welcome,</span>
                         <strong>Dr. {{user.first_name}} </strong>
                     </div>
                 </div>
 
-             
-             
+
+
             </div>
 
             <ul id="main-menu" class="">
@@ -124,58 +158,70 @@
                 <li class="active ">
                     <a href="{% url 'Hospital:department' %}">
                         <i class="fa fa-sitemap"></i>
-                        <span>Department</span>
+                        <span>Departments</span>
                     </a>
                 </li>
 
-                <li class="">
-                    <a href="{% url 'Hospital:doctor' %}">
-                        <i class="fa fa-user-md"></i>
-                        <span>Doctor</span>
-                    </a>
-                </li>
+
+
 
                 <li class=" ">
-                    <a href="{% url 'Hospital:patient' %}">
+                    <a href="#">
                         <i class="fa fa-user"></i>
-                        <span>Patient</span>
+                        <span>Employees</span>
                     </a>
+                    <ul>
+                        <li class="">
+                            <a href="{% url 'Hospital:doctor' %}">
+                                <i class="fa fa-user-md"></i>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:patient' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Patients</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:nurse' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Nurses</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:pharmacist' %}">
+                                <i class="fa fa-medkit"></i>
+                                <span>Pharmacists</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:labaratorist' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Laboratorists</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:accountant' %}">
+                                <i class="fa fa-money"></i>
+                                <span>Accountants</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:receptionist' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Receptionists</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:nurse' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Nurse</span>
-                    </a>
-                </li>
-
-                <li class=" ">
-                    <a href="{% url 'Hospital:pharmacist' %}">
-                        <i class="fa fa-medkit"></i>
-                        <span>Pharmacist</span>
-                    </a>
-                </li>
-
-                <li class=" ">
-                    <a href="{% url 'Hospital:labaratorist' %}">
-                        <i class="fa fa-user"></i>
-                        <span>Laboratorist</span>
-                    </a>
-                </li>
-
-                <li class=" ">
-                    <a href="{% url 'Hospital:accountant' %}">
-                        <i class="fa fa-money"></i>
-                        <span>Accountant</span>
-                    </a>
-                </li>
-
-                <li class=" ">
-                    <a href="{% url 'Hospital:receptionist' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Receptionist</span>
-                    </a>
-                </li>
 
                 <li class=" ">
                     <a href="#">
@@ -213,7 +259,7 @@
                                 <span>Medicine</span>
                             </a>
                         </li>
-                        <li class=" ">
+                        {% comment %} <li class=" ">
                             <a href="{% url 'Hospital:operationreport' %}">
                                 <i class="entypo-dot"></i>
                                 <span>Operation Report</span>
@@ -230,7 +276,7 @@
                                 <i class="entypo-dot"></i>
                                 <span>Death Report</span>
                             </a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
 
@@ -306,23 +352,131 @@
                 </div>
 
             </div>
+            {% comment %} <hr style="margin-top:0px;" />
+                <h3 style="margin:20px 0px; color:#818da1; font-weight:200;">
+                    <i class="entypo-right-circled"></i>
+                    Department                </h3>
 
+                <button onclick="showAjaxModal('http://creativeitem.com/demo/bayanno/index.php/modal/popup/add_department');" 
+    class="btn btn-primary pull-right">
+    <i class="fa fa-plus"></i>&nbsp;Add Department</button>
+<div style="clear:both;"></div>
+<br>
+<table class="table table-bordered table-striped datatable" id="table-2">
+    <thead>
+        <tr>
+            <th>Icon</th>
+            <th>Name</th>
+            <th width="50%">Description</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+           
+            <tr>
+                <td>
+                    <img src="http://creativeitem.com/demo/bayanno/uploads/frontend/department_images/1.png"
+                        width="40">
+                </td>
+                <td>Anesthetics</td>
+                <td>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believabl ...</td>
+                <td>
+                    <a href="http://creativeitem.com/demo/bayanno/index.php/admin/department_facilities/1"
+                        class="btn btn-default btn-sm">
+                        <i class="fa fa-plus"></i>&nbsp;Manage Facilities                    </a>
+                    <a  onclick="showAjaxModal('http://creativeitem.com/demo/bayanno/index.php/modal/popup/edit_department/1');" 
+                        class="btn btn-info btn-sm">
+                        <i class="fa fa-pencil"></i>&nbsp;Edit                    </a>
+                    <a onclick="confirm_modal('http://creativeitem.com/demo/bayanno/index.php/admin/department/delete/1')"
+                       class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i>&nbsp;Delete                    </a>
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    <img src="http://creativeitem.com/demo/bayanno/uploads/frontend/department_images/2.png"
+                        width="40">
+                </td>
+                <td>Cardiology</td>
+                <td>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believabl ...</td>
+                <td>
+                    <a href="http://creativeitem.com/demo/bayanno/index.php/admin/department_facilities/2"
+                        class="btn btn-default btn-sm">
+                        <i class="fa fa-plus"></i>&nbsp;Manage Facilities                    </a>
+                    <a  onclick="showAjaxModal('http://creativeitem.com/demo/bayanno/index.php/modal/popup/edit_department/2');" 
+                        class="btn btn-info btn-sm">
+                        <i class="fa fa-pencil"></i>&nbsp;Edit                    </a>
+                    <a onclick="confirm_modal('http://creativeitem.com/demo/bayanno/index.php/admin/department/delete/2')"
+                       class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i>&nbsp;Delete                    </a>
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    <img src="http://creativeitem.com/demo/bayanno/uploads/frontend/department_images/3.png"
+                        width="40">
+                </td>
+                <td>Gastroenterology</td>
+                <td>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believabl ...</td>
+                <td>
+                    <a href="http://creativeitem.com/demo/bayanno/index.php/admin/department_facilities/3"
+                        class="btn btn-default btn-sm">
+                        <i class="fa fa-plus"></i>&nbsp;Manage Facilities                    </a>
+                    <a  onclick="showAjaxModal('http://creativeitem.com/demo/bayanno/index.php/modal/popup/edit_department/3');" 
+                        class="btn btn-info btn-sm">
+                        <i class="fa fa-pencil"></i>&nbsp;Edit                    </a>
+                    <a onclick="confirm_modal('http://creativeitem.com/demo/bayanno/index.php/admin/department/delete/3')"
+                       class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i>&nbsp;Delete                    </a>
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    <img src="http://creativeitem.com/demo/bayanno/uploads/frontend/department_images/4.png"
+                        width="40">
+                </td>
+                <td>ewkrwg</td>
+                <td>grwuyw ...</td>
+                <td>
+                    <a href="http://creativeitem.com/demo/bayanno/index.php/admin/department_facilities/4"
+                        class="btn btn-default btn-sm">
+                        <i class="fa fa-plus"></i>&nbsp;Manage Facilities                    </a>
+                    <a  onclick="showAjaxModal('http://creativeitem.com/demo/bayanno/index.php/modal/popup/edit_department/4');" 
+                        class="btn btn-info btn-sm">
+                        <i class="fa fa-pencil"></i>&nbsp;Edit                    </a>
+                    <a onclick="confirm_modal('http://creativeitem.com/demo/bayanno/index.php/admin/department/delete/4')"
+                       class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash-o"></i>&nbsp;Delete                    </a>
+                </td>
+            </tr>
+            </tbody>
+</table> {% endcomment %}
+
+
+ 
             <hr style="margin-top:0px; " />
             <h3 style="margin:20px 0px; color:#818da1; font-weight:200; ">
                 <i class="entypo-right-circled "></i>
                 Departments </h3>
 
-            <button onclick="showAjaxModal_add(); " class="btn btn-primary pull-right ">
-                <i class="fa fa-plus "></i>&nbsp;Add Department</button>
+            {% comment %} <button onclick="showAjaxModal_add(); " class="btn btn-primary pull-right ">
+                <i class="fa fa-plus "></i>&nbsp;Add Department</button> {% endcomment %}
+
+            <a href={% url 'Hospital:newdept' %} class="btn btn-primary pull-right ">
+                <i class="fa fa-plus "></i>&nbsp;Add Department</a>
             <div style="clear:both; "></div>
             <br>
             <table class="table table-bordered table-striped datatable " id="table-2 ">
                 <thead>
                     <tr>
-                        <th width="10%">Icon</th>
+                        <th width="40">Icon</th>
                         <th>Name</th>
                         <th width="50%">Description</th>
-                        <th width="20%">Options</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
 
@@ -330,7 +484,11 @@
                     {% for department in departments %}
                     <tr>
                         <td>
-                            <img src="{{department.depticon.url}}" width="100" height="100">
+                        {% if department.depticon == 'aa' %}
+                            <img src= "{% static 'Hospital/uploads/frontend/service_images/1.png' %}" width="40">
+                        {% else %}
+                            <img src="{{department.depticon.url}}" width="40">
+                        {% endif %}
                         </td>
                         <td>{{department.departmentname}}</td>
                         <td>{{department.description}}</td>
@@ -342,9 +500,9 @@
                         </td>
                     </tr>
                     {% endfor %}
-                   
+
                 </tbody>
-            </table>
+            </table> 
 
             <script type="text/javascript">
                 jQuery(window).load(function () {
@@ -395,39 +553,52 @@
 
 
     <script type="text/javascript">
-        function showAjaxModal_add() {
-            var urlx = "{% url 'Hospital:adddepartmentmodal' %}"; 
-            // SHOWING AJAX PRELOADER IMAGE
-            jQuery('#modal_ajax .modal-body ').html('<div style="text-align:center;margin-top:200px;"> <img src = "/static/Hospital/assets/images/preloader.gif" style = "height:25px;" /></div>');
+        
+        {% comment %} {% if formerror %}
              // LOADING THE AJAX MODAL 
-             jQuery('#modal_ajax').modal('show', {
-                    backdrop: 'true'
-                });
-                 // SHOW AJAX RESPONSEON REQUEST SUCCESS 
-                 $.ajax({
-                    url: urlx,
-                    success: function (response) {
-                        jQuery('#modal_ajax .modal-body').html(response);
-                    }
-                });
-            }
-            function showAjaxModal_edit(a) {
-                var urlx = "{% url 'Hospital:editdepartmentmodal' 123 %}"; 
-                var urly = urlx.replace('123',a);
-                // SHOWING AJAX PRELOADER IMAGE
-                jQuery('#modal_ajax2 .modal-body ').html('<div style="text-align:center;margin-top:200px;"> <img src = "/static/assets/images/preloader.gif" style = "height:25px;" /></div>');
-                 // LOADING THE AJAX MODAL 
-                 jQuery('#modal_ajax2').modal('show', {
-                        backdrop: 'true'
-                    });
-                     // SHOW AJAX RESPONSEON REQUEST SUCCESS 
-                     $.ajax({
-                        url: urly,
-                        success: function (response) {
-                            jQuery('#modal_ajax2 .modal-body').html(response);
-                        }
-                    });
+            jQuery('#modal_ajax').modal('show', {
+                backdrop: 'true'
+            });
+        {% endif %} {% endcomment %}
+        
+        function showAjaxModal_add() {
+            var urlx = "{% url 'Hospital:adddepartmentmodal' %}";
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal_ajax .modal-body ').html(
+                '<div style="text-align:center;margin-top:200px;"> <img src = "/static/Hospital/assets/images/preloader.gif" style = "height:25px;" /></div>'
+            );
+            // LOADING THE AJAX MODAL 
+            jQuery('#modal_ajax').modal('show', {
+                backdrop: 'true'
+            });
+            // SHOW AJAX RESPONSEON REQUEST SUCCESS 
+            $.ajax({
+                url: urlx,
+                success: function (response) {
+                    jQuery('#modal_ajax .modal-body').html(response);
                 }
+            });
+        }
+
+        function showAjaxModal_edit(a) {
+            var urlx = "{% url 'Hospital:editdepartmentmodal' 123 %}";
+            var urly = urlx.replace('123', a);
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal_ajax2 .modal-body ').html(
+                '<div style="text-align:center;margin-top:200px;"> <img src = "/static/assets/images/preloader.gif" style = "height:25px;" /></div>'
+            );
+            // LOADING THE AJAX MODAL 
+            jQuery('#modal_ajax2').modal('show', {
+                backdrop: 'true'
+            });
+            // SHOW AJAX RESPONSEON REQUEST SUCCESS 
+            $.ajax({
+                url: urly,
+                success: function (response) {
+                    jQuery('#modal_ajax2 .modal-body').html(response);
+                }
+            });
+        }
     </script>
 
     <!-- (Ajax Modal)-->
@@ -438,10 +609,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 class="modal-title">Add Department</h3>
-                   
+
                 </div>
 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
 
                 </div>
@@ -460,10 +631,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 class="modal-title">Edit Department</h3>
-                   
+
                 </div>
 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
 
                 </div>
@@ -483,8 +654,8 @@
             jQuery('#modal-4').modal('show', {
                 backdrop: 'static'
             });
-            var urlx = "{% url 'Hospital:deletedepartment' 123 %}"; 
-            var urly = urlx.replace('123',delete_url);
+            var urlx = "{% url 'Hospital:deletedepartment' 123 %}";
+            var urly = urlx.replace('123', delete_url);
             document.getElementById('delete_link').setAttribute('href', urly);
         }
     </script>
@@ -514,21 +685,22 @@
         function showCustomWidthModal(url) {
             // SHOWING AJAX PRELOADER IMAGE
             jQuery('#modal-2 .modal-body').html(
-                '<div style="text-align:center;margin-top:200px;"><img src="assets / images / preloader.gif " style="height: 25 px;" /></div>');
+                '<div style="text-align:center;margin-top:200px;"><img src="assets / images / preloader.gif " style="height: 25 px;" /></div>'
+            );
 
-                // LOADING THE AJAX MODAL
-                jQuery('#modal-2').modal('show', {
-                    backdrop: 'true'
-                });
+            // LOADING THE AJAX MODAL
+            jQuery('#modal-2').modal('show', {
+                backdrop: 'true'
+            });
 
-                // SHOW AJAX RESPONSE ON REQUEST SUCCESS
-                $.ajax({
-                    url: url,
-                    success: function (response) {
-                        jQuery('#modal-2 .modal-body').html(response);
-                    }
-                });
-            }
+            // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+            $.ajax({
+                url: url,
+                success: function (response) {
+                    jQuery('#modal-2 .modal-body').html(response);
+                }
+            });
+        }
     </script>
 
     <div class="modal fade custom-width" id="modal-2">
@@ -560,7 +732,7 @@
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-    <!-- Bottom Scripts -->
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
@@ -603,12 +775,30 @@
 
     <script src="{% static 'Hospital/assets/js/ajax-form-submission.js' %}"></script>
 
+
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
+
+
+    <script src="{% static 'Hospital/assets/js/jquery.magnific-popup.js' %}"></script>
+
     <script>
         $(".html5editor").wysihtml5();
     </script>
 
 
-
+    <script>
+    {% for message in messages %} 
+    {% ifequal request.session.foo 1 %} 
+        toastr.error('Submitted Data Invalid, Please re-insert carefully'); 
+    {% endifequal %}
+    {% ifequal request.session.foo 2 %} 
+        toastr.success('New Department Saved Successfuly');
+    {% endifequal %}
+    {% ifequal request.session.foo 3 %} 
+        toastr.error('Department Deleted Successfuly');
+    {% endifequal %}
+    {% endfor %}
+    </script>
 </body>
 
 </html>

@@ -11,6 +11,10 @@ urlpatterns = [
     path('admindash', views.admindash, name='admindash'),
     path('accountant', views.accountant, name='accountant'),
     path('doctor', views.doctor, name='doctor'),
+    path('newdept', views.newdept, name='newdept'),
+    path('newdoc', views.newdoc, name='newdoc'),
+    path('newpat', views.newpat, name='newpat'),
+    
     path('bedallotment', views.bedallotment, name='bedallotment'),
     path('birthreport', views.birthreport, name='birthreport'),
     path('bloodbank', views.bloodbank, name='bloodbank'),
@@ -67,11 +71,13 @@ urlpatterns = [
     path('deletepharmacist/<int:id>', views.deletepharmacist, name='deletepharmacist'),
     path('deletelabaratorist/<int:id>', views.deletelabaratorist, name='deletelabaratorist'),
     path('deleteaccountant/<int:id>', views.deleteaccountant, name='deleteaccountant'),
+    path('deletebed/<int:id>', views.deletebed, name='deletebed'),
     
     path('deleteprescription/<int:id>', views.deleteprescription, name='deleteprescription'),
     path('deletepatient/<int:id>', views.deletepatient, name='deletepatient'),
-    path('editdoctormodal/<int:doc_id>',
-         views.editdoctormodal, name='editdoctormodal'),
+    path('editdoctormodal/<int:doc_id>',views.editdoctormodal, name='editdoctormodal'),
+    path('editbedmodal/<int:bed_id>',views.editbedmodal, name='editbedmodal'),
+    path('editbed', views.editbed, name='editbed'),     
     path('editdoctor', views.editdoctor, name='editdoctor'),
     path('editnursemodal/<int:nur_id>',
          views.editnursemodal, name='editnursemodal'),
@@ -125,6 +131,8 @@ urlpatterns = [
     path('editappointment', views.editappointment, name='editappointment'),
     path('editappointmentmodal/<int:id>',views.editappointmentmodal, name='editappointmentmodal'),
     path('deleteappointment/<int:id>', views.deleteappointment, name='deleteappointment'),
+    path('deleteappointmentrequest/<int:id>', views.deleteappointmentrequest, name='deleteappointmentrequest'),
+    
     # accountant
     path('accountdash', views.accountdash, name='accountdash'),
     path('invoicemanage', views.invoicemanage, name='invoicemanage'),

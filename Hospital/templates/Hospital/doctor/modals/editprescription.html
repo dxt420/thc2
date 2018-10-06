@@ -4,11 +4,6 @@
 
         <div class="panel panel-primary" data-collapsed="0">
 
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h3>Edit Prescription</h3>
-                </div>
-            </div>
 
             <div class="panel-body">
 
@@ -46,7 +41,7 @@
                         <label for="field-ta" class="col-sm-3 control-label">Case History</label>
 
                         <div class="col-sm-9">
-                            <textarea name="case_history" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            <textarea name="case_history" class="form-control " id="field-ta"   >
                             {{prescription.case_history}}
                             </textarea> 
                             {% comment %} {{form.case_history}} {% endcomment %}
@@ -57,7 +52,7 @@
                         <label for="field-ta" class="col-sm-3 control-label">Medication</label>
 
                         <div class="col-sm-9">
-                            <textarea name="medication" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            <textarea name="medication" class="form-control " id="field-ta"   >
                             {{prescription.medication}}
                             </textarea>
                             
@@ -68,7 +63,7 @@
                         <label for="field-ta" class="col-sm-3 control-label">Note</label>
 
                         <div class="col-sm-9">
-                            <textarea name="note" class="form-control html5editor" id="field-ta" data-stylesheet-url="{% static 'Hospital/assets/css/wysihtml5-color.css' %}">
+                            <textarea name="note" class="form-control " id="field-ta" >
                             {{prescription.note}}
                             </textarea> 
                             

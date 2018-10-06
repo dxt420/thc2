@@ -1,6 +1,5 @@
 # from . settings import LOGIN_REDIRECT_URL,LOGIN_URL
 from django.contrib.auth.decorators import user_passes_test
-from . models import Role
 
 def admin_required(function=None):
 
@@ -25,7 +24,7 @@ def doc_required(function=None):
 def nurse_required(function=None):
     
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.role == Role.NURSE
+        lambda u: u.is_active and u.is_nurse
     )
     if function:
         return actual_decorator(function)
@@ -34,7 +33,7 @@ def nurse_required(function=None):
 def patient_required(function=None):
     
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.role == Role.PATIENT
+        lambda u: u.is_active and u.is_patient
     )
     if function:
         return actual_decorator(function)
@@ -43,7 +42,7 @@ def patient_required(function=None):
 def labaratorist_required(function=None):
     
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.role == Role.LABARATORIST
+        lambda u: u.is_active and u.is_labaratorist
     )
     if function:
         return actual_decorator(function)
@@ -52,7 +51,7 @@ def labaratorist_required(function=None):
 def accountant_required(function=None):
     
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.role == Role.ACCOUNTANT
+        lambda u: u.is_active and u.is_accountant
     )
     if function:
         return actual_decorator(function)
@@ -61,7 +60,7 @@ def accountant_required(function=None):
 def pharmacist_required(function=None):
     
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.role == Role.PHARMACIST
+        lambda u: u.is_active and u.is_pharmacist
     )
     if function:
         return actual_decorator(function)

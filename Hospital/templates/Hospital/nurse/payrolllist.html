@@ -87,6 +87,11 @@
 </style>
     </head>
     <body class="page-body">
+    <div class="preloader">
+                <div class="preloaderIn">
+                    <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+                </div>
+            </div>
         <div class="page-container             " >
             <div class="sidebar-menu">
     <header class="logo-env" >
@@ -94,7 +99,7 @@
         <!-- logo -->
         <div class="logo" style="">
             <a href="">
-                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:83px;"/>
+                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:60px;"/>
             </a>
         </div>
 
@@ -116,8 +121,14 @@
     <div class="sidebar-user-info">
 
         <div class="sui-normal">
-            <a href="#" class="user-link">
-                <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;">
+           <a href="#" class="user-link">
+                 {% if user.usericon %}
+                            
+                           <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;">
+                        {% else %}
+                             <img src= "{% static 'Hospital/uploads/user.jpg' %}" class="img-circle" style="height:44px;">
+                        {% endif %}
+                
 
                 <span>Welcome, </span>
                 <strong>{{user.first_name}}               </strong>
@@ -377,6 +388,7 @@ function showAjaxModal(a)
 				jQuery('#modal_ajax .modal-body').html(response);
 			}
 		});
+    }
 	</script>
     
     <!-- (Ajax Modal)-->
@@ -389,7 +401,7 @@ function showAjaxModal(a)
                     <h4 class="modal-title">TrueHealthcare</h4>
                 </div>
                 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
                     
                 </div>
@@ -437,7 +449,7 @@ function showAjaxModal(a)
         function showCustomWidthModal(url)
         {
             // SHOWING AJAX PRELOADER IMAGE
-            jQuery('#modal-2 .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="{% static 'Hospital/assets/images/preloader.gif" style="height:25px;" /></div>');
+            jQuery('#modal-2 .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height:25px;" /></div>');
 
             // LOADING THE AJAX MODAL
             jQuery('#modal-2').modal('show', {backdrop: 'true'});
@@ -481,7 +493,7 @@ function showAjaxModal(a)
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-<!-- Bottom Scripts -->
+<script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
@@ -521,6 +533,10 @@ function showAjaxModal(a)
 <script src="{% static 'Hospital/assets/js/neon-demo.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/neon-notes.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/jquery.form.js' %}"></script>
+
+
+<script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
+
 
 <script src="{% static 'Hospital/assets/js/ajax-form-submission.js' %}"></script>
 

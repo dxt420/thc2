@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Manage Profile - TrueHealthcare</title>
+    <title>Patient - TrueHealthcare</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,6 +46,8 @@
 
     <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
 
+
+<link rel="stylesheet" href="{% static 'Hospital/assets/css/magnific-popup.css' %}">
     <!--[if lt IE 9]><script src="{% static 'Hospital/assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -85,14 +87,19 @@
 </head>
 
 <body class="page-body">
-    <div class="page-container             ">
+<div class="preloader">
+                <div class="preloaderIn">
+                    <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+                </div>
+            </div>
+    <div class="page-container">
         <div class="sidebar-menu">
             <header class="logo-env">
 
                 <!-- logo -->
                 <div class="logo" style="">
                     <a href="#">
-                        <img src="{% static 'Hospital/uploads/logo.png' %}" style="max-height:83px;" />
+                        <img src="{% static 'Hospital/uploads/logo.png' %}" style="max-height:60px;" />
                     </a>
                 </div>
 
@@ -142,57 +149,65 @@
                 <li class=" ">
                     <a href="{% url 'Hospital:department' %}">
                         <i class="fa fa-sitemap"></i>
-                        <span>Department</span>
+                        <span>Departments</span>
                     </a>
                 </li>
 
-                <li class="">
-                    <a href="{% url 'Hospital:doctor' %}">
-                        <i class="fa fa-user-md"></i>
-                        <span>Doctor</span>
-                    </a>
-                </li>
-
-                <li class=" ">
-                    <a href="{% url 'Hospital:patient' %}">
+                <li class="opened active ">
+                    <a href="#">
                         <i class="fa fa-user"></i>
-                        <span>Patient</span>
+                        <span>Employees</span>
                     </a>
-                </li>
+                    <ul>
+                        <li class="">
+                            <a href="{% url 'Hospital:doctor' %}">
+                                <i class="fa fa-user-md"></i>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:nurse' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Nurse</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:patient' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Patients</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:pharmacist' %}">
-                        <i class="fa fa-medkit"></i>
-                        <span>Pharmacist</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:nurse' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Nurses</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:labaratorist' %}">
-                        <i class="fa fa-user"></i>
-                        <span>Laboratorist</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:pharmacist' %}">
+                                <i class="fa fa-medkit"></i>
+                                <span>Pharmacists</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:accountant' %}">
-                        <i class="fa fa-money"></i>
-                        <span>Accountant</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:labaratorist' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Laboratorists</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:receptionist' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Receptionist</span>
-                    </a>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:accountant' %}">
+                                <i class="fa fa-money"></i>
+                                <span>Accountants</span>
+                            </a>
+                        </li>
+
+                        <li class=" ">
+                            <a href="{% url 'Hospital:receptionist' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Receptionists</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class=" ">
@@ -231,7 +246,7 @@
                                 <span>Medicine</span>
                             </a>
                         </li>
-                        <li class=" ">
+                        {% comment %} <li class=" ">
                             <a href="{% url 'Hospital:operationreport' %}">
                                 <i class="entypo-dot"></i>
                                 <span>Operation Report</span>
@@ -248,7 +263,7 @@
                                 <i class="entypo-dot"></i>
                                 <span>Death Report</span>
                             </a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
 
@@ -276,7 +291,7 @@
                 
 
                 <!-- ACCOUNT -->
-                {% comment %} <li class="active ">
+                {% comment %} <li class=" ">
                     <a href="{% url 'Hospital:manageprofile' %}">
                         <i class="fa fa-user"></i>
                         <span>Account</span>
@@ -327,120 +342,206 @@
             <hr style="margin-top:0px;" />
             <h3 style="margin:20px 0px; color:#818da1; font-weight:200;">
                 <i class="entypo-right-circled"></i>
-                Manage Profile </h3>
+             New Patient </h3>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>Edit Profile</h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form action=" ? manage_profile/update_profile_info" class="form-horizontal form-groups validate" target="_top" method="post"
-                                accept-charset="utf-8">
+          
+            <div style="clear:both;"></div>
+            <br>
+           
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-primary" data-collapsed="0">
+
+            
+
+            <div class="panel-body">
+               
+
+               
+               
+               
+                <form role="form" class="form-horizontal form-groups" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">First Name</label>
+
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="text" name="first_name" class="form-control"
+                                            required> {% endcomment %}
+                                        {{ form.first_name }}
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.first_name.errors.as_text }}</span>
+
+                                    <label class="col-sm-2 control-label">Last Name</label>
+
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="text" name="last_name" value="" class="form-control"
+                                            required> {% endcomment %}
+                                        {{ form.last_name }}
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.last_name.errors.as_text }}</span>
+                                </div>
+
                                 <div class="form-group">
-                    <input type="hidden" name="did" value="{{doctor.user_id}}" /> 
-                        <label for="field-1" class="col-sm-3 control-label">First Name</label>
+                                    <label for="field-ta" class="col-sm-2 control-label">Email</label>
 
-                        <div class="col-sm-7">
-                        <input type="text" name="first_name" class="form-control" id="field-1" value="{{doctor.user.first_name}}" required>
-                             
-                            
-                        </div>
-                    </div>
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="email" name="email" class="form-control" value=""
+                                            required> {% endcomment %}
+                                        {{ form.email }}
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.email.errors.as_text }}</span>
 
-                     <div class="form-group">
-                   
-                        <label for="field-1" class="col-sm-3 control-label">Last Name</label>
 
-                        <div class="col-sm-7">
-                        <input type="text" name="last_name" class="form-control" id="field-1" value="{{doctor.user.last_name}}" required>
-                             
-                            
-                        </div>
-                    </div>
+                                    <label for="field-1" class="col-sm-2 control-label">Username</label>
+
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="text" name="username" value="" class="form-control"
+                                            required> {% endcomment %}
+                                        {{ form.username }}
+
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.username.errors.as_text }}</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="field-1" class="col-sm-2 control-label">Password</label>
+
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="password" name="password1" class="form-control"
+                                            required> {% endcomment %}
+                                        {{ form.password1 }}
+
+                                    </div>
+
+                                    <label for="field-1" class="col-sm-2 control-label">Confirm Password</label>
+
+                                    <div class="col-sm-3">
+                                        {% comment %} <input type="password" name="password2" class="form-control"
+                                            required> {% endcomment %}
+                                        {{ form.password2 }}
+
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.password2.errors.as_text }}</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="field-1" class="col-sm-2 control-label">D.O.B</label>
+
+                                    <div class="col-sm-2">
+                                        {% comment %} <input type="text" name="dob" class="form-control datepicker"
+                                            required> {% endcomment %}
+                                        {{ form.dob }}
+
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.dob.errors.as_text }}</span>
+
+                                    <label for="field-ta" class="col-sm-1 control-label">Phone</label>
+
+                                    <div class="col-sm-2">
+                                        {% comment %} <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                            name="phone" class="form-control" required> {% endcomment %}
+                                        {{ form.phone }}
+                                    </div>
+                                    
+                                    <label for="field-1" class="col-sm-1 control-label">Sex</label>
+
+                                    <div class="col-sm-2">
+                                        {% comment %} <input type="text" name="dob" class="form-control datepicker"
+                                            required> {% endcomment %}
+                                        {{ form.sex }}
+
+                                    </div>
+                                  
+
+                                </div>   
+
+                                   <div class="form-group">
+                                    
+                                    
+
+                                  
+                                    <label for="field-ta" class="col-sm-2 control-label">Blood Group</label>
+
+                                    <div class="col-sm-2">
+                                        {{ form.blood_group }}
+
+                                    </div>
+                                    <span style="color: #cc2424">{{ form.blood_group.errors.as_text }}</span>
+
+                                </div>   
+                    {% comment %} {{form.as_p}} {% endcomment %}
 
                     <div class="form-group">
-                        <label for="field-ta" class="col-sm-3 control-label">Email</label>
+                        <label class="col-sm-2 control-label">Image</label>
 
                         <div class="col-sm-7">
-                        <input type="email" name="email" class="form-control" id="field-1" value="{{doctor.user.email}}" required>
-                              
-                          
-                        </div>
-                    </div>
 
-
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Name</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="name" value="Mr. Admin" required/>
-                                    </div>
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+                                    <img src="http://placehold.it/200x150" alt="...">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="email" value="admin@example.com" required/>
-                                    </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+                                <div>
+                                    <span class="btn btn-white btn-file">
+                                        <span class="fileinput-new">Select image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="usericon" accept="image/*">
+                                    </span>
+                                    <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-5">
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fa fa-check"></i>&nbsp; Update Profile</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--password-->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>Change Password</h4>
                             </div>
-                        </div>
-                        <div class="panel-body">
-                            <form action=" ? manage_profile/change_password" class="form-horizontal form-groups validate" target="_top" method="post"
-                                accept-charset="utf-8">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Current Password</label>
-                                    <div class="col-sm-5">
-                                        <input type="password" class="form-control" name="password" value="" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">New Password</label>
-                                    <div class="col-sm-5">
-                                        <input type="password" class="form-control" name="new_password" value="" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Confirm New Password</label>
-                                    <div class="col-sm-5">
-                                        <input type="password" class="form-control" name="confirm_new_password" value="" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-5">
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fa fa-check"></i>&nbsp; Update Password</button>
-                                    </div>
-                                </div>
-                            </form>
+
                         </div>
                     </div>
-                </div>
+
+                    <div class="col-sm-3 control-label ">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check"></i> Save </button>
+                    </div>
+                </form>
+
             </div>
 
+        </div>
+
+    </div>
+</div>
+
+
+            <script type="text/javascript">
+                jQuery(window).load(function () {
+                    var $ = jQuery;
+
+                    $("#table-2").dataTable({
+                        "sPaginationType": "bootstrap",
+                        "sDom": "<'row'<'col-xs-3 col-left'l><'col-xs-9 col-right'<'export-data'T>f>r>t<'row'<'col-xs-3 col-left'i><'col-xs-9 col-right'p>>"
+                    });
+
+                    $(".dataTables_wrapper select").select2({
+                        minimumResultsForSearch: -1
+                    });
+
+                    // Highlighted rows
+                    $("#table-2 tbody input[type=checkbox]").each(function (i, el) {
+                        var $this = $(el),
+                            $p = $this.closest('tr');
+
+                        $(el).on('change', function () {
+                            var is_checked = $this.is(':checked');
+
+                            $p[is_checked ? 'addClass' : 'removeClass']('highlight');
+                        });
+                    });
+
+                    // Replace Checboxes
+                    $(".pagination a").click(function (ev) {
+                        replaceCheckboxes();
+                    });
+                });
+            </script>
             <!-- Footer -->
             <footer class="main">
                 &copy; 2018
@@ -455,7 +556,8 @@
 
     </div>
     <script type="text/javascript">
-        function showAjaxModal(url) {
+        function showAjaxModal_add() {
+            var urlx = "{% url 'Hospital:addpatientmodal' %}"; 
             // SHOWING AJAX PRELOADER IMAGE
             jQuery('#modal_ajax .modal-body').html(
                 '<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height:25px;" /></div>'
@@ -468,9 +570,31 @@
 
             // SHOW AJAX RESPONSE ON REQUEST SUCCESS
             $.ajax({
-                url: url,
+                url: urlx,
                 success: function (response) {
                     jQuery('#modal_ajax .modal-body').html(response);
+                }
+            });
+        }
+
+        function showAjaxModal_edit(a) {
+            var urlx = "{% url 'Hospital:editpatientmodal' 123 %}"; 
+            var urly = urlx.replace('123',a);
+            // SHOWING AJAX PRELOADER IMAGE
+            jQuery('#modal_ajax2 .modal-body').html(
+                '<div style="text-align:center;margin-top:200px;"><img src="/static/Hospital/assets/images/preloader.gif" style="height:25px;" /></div>'
+            );
+
+            // LOADING THE AJAX MODAL
+            jQuery('#modal_ajax2').modal('show', {
+                backdrop: 'true'
+            });
+
+            // SHOW AJAX RESPONSE ON REQUEST SUCCESS
+            $.ajax({
+                url: urly,
+                success: function (response) {
+                    jQuery('#modal_ajax2 .modal-body').html(response);
                 }
             });
         }
@@ -483,10 +607,31 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Dext</h4>
+                    <h3 class="modal-title">Add Patient</h3>
                 </div>
 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="modal fade" id="modal_ajax2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Edit Patient</h3>
+                </div>
+
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
 
                 </div>
@@ -506,7 +651,9 @@
             jQuery('#modal-4').modal('show', {
                 backdrop: 'static'
             });
-            document.getElementById('delete_link').setAttribute('href', delete_url);
+            var urlx = "{% url 'Hospital:deletepatient' 123 %}"; 
+            var urly = urlx.replace('123',delete_url);
+            document.getElementById('delete_link').setAttribute('href', urly);
         }
     </script>
 
@@ -559,7 +706,7 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Dext</h4>
+                    <h4 class="modal-title">TrueHealthcare</h4>
                 </div>
 
                 <div class="modal-body">
@@ -582,7 +729,7 @@
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-    <!-- Bottom Scripts -->
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
@@ -625,11 +772,30 @@
 
     <script src="{% static 'Hospital/assets/js/ajax-form-submission.js' %}"></script>
 
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
+
+
+    <script src="{% static 'Hospital/assets/js/jquery.magnific-popup.js' %}"></script>
+
     <script>
         $(".html5editor").wysihtml5();
     </script>
-
-
+    <script>
+    {% for message in messages %} 
+    {% ifequal request.session.foo 1 %} 
+        toastr.error('Submitted Data Invalid, Please re-insert carefully'); 
+    {% endifequal %}
+    {% ifequal request.session.foo 2 %} 
+        toastr.success('New Patient Saved Successfuly');
+    {% endifequal %}
+    {% ifequal request.session.foo 3 %} 
+        toastr.error('Patient Deleted Successfuly');
+    {% endifequal %}
+    {% ifequal request.session.foo 4 %} 
+        toastr.info('Patient Modified Successfuly');
+    {% endifequal %}
+    {% endfor %}
+    </script>
 
 </body>
 

@@ -12,19 +12,11 @@
                     {% csrf_token %}
                     
                     <div class="form-group">
-                    {% if form.errors %}
-                        <ol>
-                        {% for error in form.errors %}
-                            <li>{{error | escape}}</li>
-                        {% endfor %}
-                        </ol>
-
-                    {% endif %}
+                    
                         <label for="field-1" class="col-sm-3 control-label">Name</label>
 
                         <div class="col-sm-7">
-                                {{ form.departmentname }}
-                                {% comment %} {{ form.departmentname.errors }} {% endcomment %}
+                                <input type="text" name="departmentname" class="form-control" id="field-1" placeholder="Enter Department Name" required>
                         </div>
                     </div>
 

@@ -7,6 +7,8 @@ from . models import CustomUser,Patient,Department,Doctor,PaymentHistory,BedAllo
 
 
 
+
+
 # Register your models here.
 
 # class CustomUserAdmin(UserAdmin):
@@ -17,7 +19,7 @@ from . models import CustomUser,Patient,Department,Doctor,PaymentHistory,BedAllo
     
 
 
-# admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(CustomUser)
 
 # admin.site.register(Patient)
 # admin.site.register(Department)

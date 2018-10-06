@@ -124,59 +124,65 @@
                         <li class=" ">
                             <a href="{% url 'Hospital:department' %}">
                                 <i class="fa fa-sitemap"></i>
-                                <span>Department</span>
+                                <span>Departments</span>
                             </a>
                         </li>
-        
+        <li class=" ">
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>Employees</span>
+                    </a>
+                    <ul>
                         <li class="">
                             <a href="{% url 'Hospital:doctor' %}">
                                 <i class="fa fa-user-md"></i>
-                                <span>Doctor</span>
+                                <span>Doctors</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:patient' %}">
                                 <i class="fa fa-user"></i>
-                                <span>Patient</span>
+                                <span>Patients</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:nurse' %}">
                                 <i class="fa fa-plus-square"></i>
-                                <span>Nurse</span>
+                                <span>Nurses</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:pharmacist' %}">
                                 <i class="fa fa-medkit"></i>
-                                <span>Pharmacist</span>
+                                <span>Pharmacists</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:labaratorist' %}">
                                 <i class="fa fa-user"></i>
-                                <span>Laboratorist</span>
+                                <span>Laboratorists</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:accountant' %}">
                                 <i class="fa fa-money"></i>
-                                <span>Accountant</span>
+                                <span>Accountants</span>
                             </a>
                         </li>
-        
+
                         <li class=" ">
                             <a href="{% url 'Hospital:receptionist' %}">
                                 <i class="fa fa-plus-square"></i>
-                                <span>Receptionist</span>
+                                <span>Receptionists</span>
                             </a>
                         </li>
-        
+                    </ul>
+                </li>
                         <li class="opened active ">
                             <a href="#">
                                 <i class="fa fa-sun-o"></i>
@@ -381,7 +387,7 @@
                         <h4 class="modal-title">TrueHealthcare</h4>
                     </div>
 
-                    <div class="modal-body" style="height:500px; overflow:auto;">
+                    <div class="modal-body" style="height:450px; overflow:auto;">
 
 
                     </div>
@@ -476,7 +482,7 @@
         <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-        <!-- Bottom Scripts -->
+        <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
         <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
         <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
         <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>

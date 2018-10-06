@@ -1,5 +1,6 @@
 {% load static %}
-<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>    <div id="payroll_print">
+<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script>
+    <div id="payroll_print">
     <table width="100%" border="0">
         <tr>
             <td width="50%"><img src="{{payroll.employee.user.usericon.url}}" style="max-height:80px;"></td>
@@ -143,8 +144,10 @@ function Popup(data)
 {
     var mywindow = window.open('', 'payroll', 'height=400,width=600');
     mywindow.document.write('<html><head><title>Payroll Details</title>');
-    mywindow.document.write('<link rel="stylesheet" href="/static/Hospital/assets/css/neon-theme.css" type="text/css" />');
-    mywindow.document.write('<link rel="stylesheet" href="/static/Hospital/assets/js/datatables/responsive/css/datatables.responsive.css" type="text/css" />');
+     mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/css/neon-theme.css' %}" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="{% static 'Hospital/assets/js/datatables/responsive/css/datatables.responsive.css' %}" type="text/css" />');
+    
+  
     mywindow.document.write('</head><body >');
     mywindow.document.write(data);
     mywindow.document.write('</body></html>');

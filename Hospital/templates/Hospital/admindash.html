@@ -1,4 +1,4 @@
- {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="">
 
@@ -13,9 +13,9 @@
     <meta name="author" content="dxtsoft" />
 
 
-<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}">
-    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/entypo/css/entypo.css' %}"> 
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/entypo/css/entypo.css' %}">
     <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">-->
     <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600" rel="stylesheet">
@@ -28,6 +28,10 @@
 
     <script src="{% static 'Hospital/assets/js/jquery-1.11.0.min.js' %}"></script>
 
+
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/magnific-popup.css' %}">
+
+
     <!--[if lt IE 9]><script src="{% static 'Hospital/assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,7 +40,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %}"></script>
 <![endif]-->
     <link rel="shortcut icon" href="{% static 'Hospital/uploads/favicon.png' %}">
-    {% comment %} <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}"> {% endcomment %}
+    {% comment %}
+    <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
+    {% endcomment %}
 
 
 
@@ -46,8 +52,8 @@
 
 
     <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
-    
-    
+
+
     <link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/common/izitoast/css/iziToast.min.css' %}" type="text/css' %}">
     <script src="{% static 'Hospital/assets/login_page/js/vendor/modernizr-2.8.3.min.js' %}"></script>
@@ -72,8 +78,7 @@
             var chk = confirm("Are You Sure To Delete This !");
             if (chk) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -87,14 +92,20 @@
 </head>
 
 <body class="page-body ">
+    <div class="preloader">
+        <div class="preloaderIn" >
+            <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+        </div>
+    </div>
     <div class="page-container ">
+
         <div class="sidebar-menu">
             <header class="logo-env">
 
                 <!-- logo -->
                 <div class="logo" style=" ">
                     <a href="#">
-                        <img src="{% static 'Hospital/uploads/logo.png' %}" style="max-height:83px;" />
+                        <img src="{% static 'Hospital/uploads/logo.png' %}" style="max-height:60px;" />
                     </a>
                 </div>
 
@@ -102,7 +113,7 @@
                 <div class="sidebar-collapse" style="">
                     <a href="#" class="sidebar-collapse-icon with-animation">
 
-                        <i class="fa fa-bars"></i>
+                        <i class="entypo-menu "></i>
                     </a>
                 </div>
 
@@ -113,19 +124,20 @@
                     </a>
                 </div>
             </header>
-             <div class="sidebar-user-info">
+            <div class="sidebar-user-info">
 
                 <div class="sui-normal">
                     <div class="user-link">
-                        <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;" height="44px" width="44px">
+                        <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;" height="44px"
+                            width="44px">
 
                         <span>Welcome,</span>
                         <strong>Dr. {{user.first_name}} </strong>
                     </div>
                 </div>
 
-             
-             
+
+
             </div>
 
             <ul id="main-menu" class="">
@@ -144,59 +156,65 @@
                 <li class=" ">
                     <a href="{% url 'Hospital:department' %}">
                         <i class="fa fa-sitemap"></i>
-                        <span>Department</span>
+                        <span>Departments</span>
                     </a>
                 </li>
-
-                <li class="">
-                    <a href="{% url 'Hospital:doctor' %}">
-                        <i class="fa fa-user-md"></i>
-                        <span>Doctor</span>
-                    </a>
-                </li>
-
                 <li class=" ">
-                    <a href="{% url 'Hospital:patient' %}">
+                    <a href="#">
                         <i class="fa fa-user"></i>
-                        <span>Patient</span>
+                        <span>Employees</span>
                     </a>
-                </li>
+                    <ul>
+                        <li class="">
+                            <a href="{% url 'Hospital:doctor' %}">
+                                <i class="fa fa-user-md"></i>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:nurse' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Nurse</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:patient' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Patients</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:pharmacist' %}">
-                        <i class="fa fa-medkit"></i>
-                        <span>Pharmacist</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:nurse' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Nurses</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:labaratorist' %}">
-                        <i class="fa fa-user"></i>
-                        <span>Laboratorist</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:pharmacist' %}">
+                                <i class="fa fa-medkit"></i>
+                                <span>Pharmacists</span>
+                            </a>
+                        </li>
 
-                <li class="">
-                    <a href="{% url 'Hospital:accountant' %}">
-                        <i class="fa fa-money"></i>
-                        <span>Accountant</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:labaratorist' %}">
+                                <i class="fa fa-user"></i>
+                                <span>Laboratorists</span>
+                            </a>
+                        </li>
 
-                <li class=" ">
-                    <a href="{% url 'Hospital:receptionist' %}">
-                        <i class="fa fa-plus-square"></i>
-                        <span>Receptionist</span>
-                    </a>
-                </li>
+                        <li class=" ">
+                            <a href="{% url 'Hospital:accountant' %}">
+                                <i class="fa fa-money"></i>
+                                <span>Accountants</span>
+                            </a>
+                        </li>
 
+                        <li class=" ">
+                            <a href="{% url 'Hospital:receptionist' %}">
+                                <i class="fa fa-plus-square"></i>
+                                <span>Receptionists</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class=" ">
                     <a href="#">
                         <i class="fa fa-sun-o"></i>
@@ -233,7 +251,7 @@
                                 <span>Medicine</span>
                             </a>
                         </li>
-                        <li class=" ">
+                        {% comment %} <li class=" ">
                             <a href="{% url 'Hospital:operationreport' %}">
                                 <i class="entypo-dot"></i>
                                 <span>Operation Report</span>
@@ -250,7 +268,7 @@
                                 <i class="entypo-dot"></i>
                                 <span>Death Report</span>
                             </a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
 
@@ -351,9 +369,10 @@
                             <div class="icon">
                                 <i class="fa fa-user"></i>
                             </div>
-                            
-                            <div class="num" data-start="0" data-end="{{patients_count}}" data-duration="500" data-delay="0">0</div>
-                            
+
+                            <div class="num" data-start="0" data-end="{{patients_count}}" data-duration="500"
+                                data-delay="0">0</div>
+
                             <h3>Patient</h3>
                         </div>
                     </a>
@@ -377,7 +396,8 @@
                             <div class="icon">
                                 <i class="fa fa-medkit"></i>
                             </div>
-                            <div class="num" data-start="0" data-end="{{pharmacist_count}}" data-duration="1500" data-delay="0">0</div>
+                            <div class="num" data-start="0" data-end="{{pharmacist_count}}" data-duration="1500"
+                                data-delay="0">0</div>
                             <h3>Pharmacist</h3>
                         </div>
                     </a>
@@ -393,7 +413,8 @@
                             <div class="icon">
                                 <i class="fa fa-user"></i>
                             </div>
-                            <div class="num" data-start="0" data-end="{{labaratorist_count}}" data-duration="1500" data-delay="0">0</div>
+                            <div class="num" data-start="0" data-end="{{labaratorist_count}}" data-duration="1500"
+                                data-delay="0">0</div>
                             <h3>Laboratorist</h3>
                         </div>
                     </a>
@@ -405,19 +426,20 @@
                             <div class="icon">
                                 <i class="fa fa-money"></i>
                             </div>
-                            <div class="num" data-start="0" data-end="{{accountant_count}}" data-duration="1500" data-delay="0">0</div>
+                            <div class="num" data-start="0" data-end="{{accountant_count}}" data-duration="1500"
+                                data-delay="0">0</div>
                             <h3>Accountant</h3>
                         </div>
                     </a>
                 </div>
 
 
-              
+
             </div>
 
             <br />
 
-            
+
             <!-- Footer -->
             <footer class="main">
                 &copy; 2018
@@ -434,10 +456,14 @@
     <script type="text/javascript">
         function showAjaxModal(url) {
             // SHOWING AJAX PRELOADER IMAGE
-            jQuery('#modal_ajax .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="images / preloader.gif" style="height: 25px; " /></div>');
+            jQuery('#modal_ajax .modal-body').html(
+                '<div style="text-align:center;margin-top:200px;"><img src="images / preloader.gif" style="height: 25px; " /></div>'
+            );
 
             // LOADING THE AJAX MODAL
-            jQuery('#modal_ajax').modal('show', { backdrop: 'true' });
+            jQuery('#modal_ajax').modal('show', {
+                backdrop: 'true'
+            });
 
             // SHOW AJAX RESPONSE ON REQUEST SUCCESS
             $.ajax({
@@ -459,7 +485,7 @@
                     <h4 class="modal-title">TrueHealthcare</h4>
                 </div>
 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
 
                 </div>
@@ -476,7 +502,9 @@
 
     <script type="text/javascript">
         function confirm_modal(delete_url) {
-            jQuery('#modal-4').modal('show', { backdrop: 'static' });
+            jQuery('#modal-4').modal('show', {
+                backdrop: 'static'
+            });
             document.getElementById('delete_link').setAttribute('href', delete_url);
         }
     </script>
@@ -505,10 +533,14 @@
     <script type="text/javascript">
         function showCustomWidthModal(url) {
             // SHOWING AJAX PRELOADER IMAGE
-            jQuery('#modal-2 .modal-body').html('<div style="text-align:center;margin-top:200px;"><img src="images / preloader.gif" style="height: 25px; " /></div>');
+            jQuery('#modal-2 .modal-body').html(
+                '<div style="text-align:center;margin-top:200px;"><img src="images / preloader.gif" style="height: 25px; " /></div>'
+            );
 
             // LOADING THE AJAX MODAL
-            jQuery('#modal-2').modal('show', { backdrop: 'true' });
+            jQuery('#modal-2').modal('show', {
+                backdrop: 'true'
+            });
 
             // SHOW AJAX RESPONSE ON REQUEST SUCCESS
             $.ajax({
@@ -549,7 +581,7 @@
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-    <!-- Bottom Scripts -->
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
     <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
@@ -592,13 +624,18 @@
 
 
 
-  <script src="{% static 'Hospital/assets/login_page/js/vendor/jquery-1.12.0.min.js' %}"></script>
+    <script src="{% static 'Hospital/assets/login_page/js/vendor/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'Hospital/assets/common/izitoast/js/iziToast.min.js' %}"></script>
 
 
 
 
     <script src="{% static 'Hospital/assets/js/ajax-form-submission.js' %}"></script>
+
+    <script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
+
+
+    <script src="{% static 'Hospital/assets/js/jquery.magnific-popup.js' %}"></script>
 
     <script>
         $(".html5editor").wysihtml5();

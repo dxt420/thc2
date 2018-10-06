@@ -6,34 +6,11 @@ from .choices import PAYMENT_STATUS
 from django.utils import timezone
 import datetime
 
-class Role(models.Model):
-    
-    DOCTOR = 1  
-    NURSE = 2  
-    ACCOUNTANT = 3  
-    LABARATORIST = 4  
-    PHARMACIST = 5  
-    PATIENT = 6  
-    ADMIN = 7  
-    RECEPTIONIST = 8
-
-    ROLE_CHOICES = (      
-          (DOCTOR, 'doctor'),      
-          (NURSE, 'nurse'),      
-          (ACCOUNTANT, 'accountant'),      
-          (LABARATORIST, 'labartorist'),      
-          (PHARMACIST, 'admin'),
-          (PATIENT, 'admin'),
-          (ADMIN, 'admin'),
-          (RECEPTIONIST, 'receptionist'),
-    )
-    id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
  
 
 class CustomUser(AbstractUser):
-    role = models.ManyToManyField(Role)
     phone = models.CharField(max_length=30)
-    usericon = models.ImageField(upload_to='media/',blank=True)
+    usericon = models.ImageField(upload_to='media/',default='aa',blank=True)
     is_doctor = models.BooleanField(default=False,blank=True)
     is_nurse = models.BooleanField(default=False,blank=True)
     is_accountant = models.BooleanField(default=False,blank=True)
@@ -49,7 +26,7 @@ class CustomUser(AbstractUser):
 class Department(models.Model):
     departmentname = models.CharField(max_length=30)
     description = models.CharField(max_length=200)
-    depticon = models.ImageField(upload_to='media/')
+    depticon = models.ImageField(upload_to='media/',default='aa',blank=True)
     
     def __str__(self):
         return self.departmentname
@@ -77,7 +54,7 @@ class Patient(models.Model):
     blood_group = models.CharField(max_length=30)
     sex = models.CharField(max_length=8)
     dob = models.CharField(max_length=30)
-    usericon = models.ImageField(upload_to='media/')
+    usericon = models.ImageField(upload_to='media/',default='aa',blank=True)
     
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
@@ -89,7 +66,7 @@ class Patient(models.Model):
 
 class Doctor(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,primary_key=True)
-    usericon = models.ImageField(upload_to='media/')
+    usericon = models.ImageField(upload_to='media/',default='aa',blank=True)
     departmentname = models.CharField(max_length=30)
 
     def __str__(self):
@@ -297,13 +274,24 @@ class DiagnosisReport(models.Model):
 #     def __str__(self):
 #         return self.message
 
+class Conversation(models.Model):
+    participants = models.ManyToManyField(CustomUser)
 
+    # example functionality you may wish to add later
+    group_name = models.CharField(max_length=512, default="Group", blank=False, null=False)
+    profile_picture = models.FileField(upload_to='media/', default='uploads/user.jpg')
+
+    
 class Message(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="sender")
-    receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="receiver")
+    # receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="receiver")
+    receiver = models.ManyToManyField(CustomUser)
     message_content = models.TextField()
     pub_date = models.DateTimeField(default=timezone.now)
     is_read = models.BooleanField(default=False)
+    conversation = models.ForeignKey(Conversation, blank=False, null=False,on_delete=models.CASCADE)
+
+    # ordering = ["-pub_date"]
  
     class Meta:
         ordering=['pub_date']

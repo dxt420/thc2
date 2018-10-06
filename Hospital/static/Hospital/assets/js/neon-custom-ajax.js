@@ -1711,6 +1711,7 @@ function setup_horizontal_menu()
 	}
 }
 
+
 jQuery(public_vars, {
 	hover_index: 4
 });

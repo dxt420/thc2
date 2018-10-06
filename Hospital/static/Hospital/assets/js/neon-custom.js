@@ -1484,6 +1484,8 @@ var public_vars = public_vars || {};
 })(jQuery, window);
 
 
+
+
 /* Functions */
 function fit_main_content_height()
 {
@@ -2183,3 +2185,4 @@ function hide_loading_bar()
 	$loading_bar.addClass('progress-is-hidden');
 	$pct.width(0).data('pct');
 }
+

@@ -1,12 +1,18 @@
-{% load static %}
-<script src="{% static 'Hospital/assets/js/neon-custom-ajax.js' %}"></script><script>$(".html5editor").wysihtml5();</script>    <div id="prescription_print">
+
+
+<script src="assets/js/neon-custom-ajax.js"></script>
+
+<script>
+    $(".html5editor").wysihtml5();
+</script>
+<div id="prescription_print">
     <table style="color: black; font-weight: 600;" width="100%" border="0">
         <tr>
             <td align="left" valign="top">
-                                        Patient Name: {{prescription.patient}}<br>
-                    DOB: {{prescription.patient.dob}}<br>
-                    Sex: {{prescription.patient.sex}}<br>
-                                </td>
+                Patient Name: {{prescription.patient}}<br>
+                DOB: {{prescription.patient.dob}}<br>
+                Sex: {{prescription.patient.sex}}<br>
+            </td>
             <td align="right" valign="top">
                 Doctor Name: {{prescription.doctor}}<br>
                 Date: {{prescription.date}}<br>
@@ -19,23 +25,23 @@
         <div class="col-md-12">
 
             <div class="panel panel-primary" data-collapsed="0">
-                    
+
                 <div class="panel-body">
-                        
+
                     <b>Case History :</b>
-                    
+
                     <p>{{prescription.case_history}}</p>
-                    
+
                     <hr>
-                        
+
                     <b>Medication :</b>
-                    
+
                     <p>{{prescription.medication}}</p>
-                    
+
                     <hr>
-                    
+
                     <b>Note :</b>
-                    
+
                     <p>{{prescription.note}}</p>
 
                 </div>
@@ -47,34 +53,33 @@
 </div>
 <br>
 
-<a onClick="PrintElem('#prescription_print')" class="btn btn-primary hidden-print">
+<a onClick="PrintElem('#prescription_print');" class="btn btn-primary hidden-print">
     <i class="fa fa-print"></i>&nbsp;
-    Print Prescription    </a>
+    Print Prescription </a> 
 
 
 
 
 <script type="text/javascript">
+    function PrintElem(elem) {
+        Popup($(elem).html());
+    }
 
-function PrintElem(elem)
-{
-    Popup($(elem).html());
-}
+    function Popup(data) {
+        var mywindow = window.open('', 'prescription', 'height=400,width=600');
+        mywindow.document.write('<html><head><title>Prescription</title>');
+        mywindow.document.write('<link rel="stylesheet" href="assets/css/neon-theme.css" type="text/css" />');
+        mywindow.document.write('<link rel="stylesheet" href="assets/js/datatables/responsive/css/datatables.responsive.css" type="text/css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
 
-function Popup(data)
-{
-    var mywindow = window.open('', 'prescription', 'height=400,width=600');
-    mywindow.document.write('<html><head><title>Prescription</title>');
-    mywindow.document.write('<link rel="stylesheet" href="/static/Hospital/assets/css/neon-theme.css" type="text/css" />');
-    mywindow.document.write('<link rel="stylesheet" href="/static/Hospital/assets/js/datatables/responsive/css/datatables.responsive.css" type="text/css" />');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write(data);
-    mywindow.document.write('</body></html>');
+        mywindow.print();
+        mywindow.close();
 
-    mywindow.print();
-    mywindow.close();
+        return true;
+    }
+</script> 
 
-    return true;
-}
 
-</script>
+ 

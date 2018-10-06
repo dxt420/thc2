@@ -87,6 +87,11 @@
 </style>
     </head>
     <body class="page-body">
+    <div class="preloader">
+                <div class="preloaderIn">
+                    <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+                </div>
+            </div>
         <div class="page-container             " >
             <div class="sidebar-menu">
     <header class="logo-env" >
@@ -94,7 +99,7 @@
         <!-- logo -->
         <div class="logo" style="">
             <a href="">
-                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:83px;"/>
+                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:60px;"/>
             </a>
         </div>
 
@@ -117,7 +122,13 @@
 
         <div class="sui-normal">
             <a href="#" class="user-link">
-                <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;">
+                 {% if user.usericon %}
+                            
+                           <img src="{{user.usericon.url}}" alt="" class="img-circle" style="height:44px;">
+                        {% else %}
+                             <img src= "{% static 'Hospital/uploads/user.jpg' %}" class="img-circle" style="height:44px;">
+                        {% endif %}
+                
 
                 <span>Welcome, </span>
                 <strong>{{user.first_name}}               </strong>
@@ -403,7 +414,7 @@
                     <h4 class="modal-title">TrueHealthcare</h4>
                 </div>
                 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
                     
                 </div>
@@ -495,7 +506,7 @@
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-<!-- Bottom Scripts -->
+<script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>
@@ -528,6 +539,10 @@
 <script src="{% static 'Hospital/assets/js/datatables/lodash.min.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/datatables/responsive/js/datatables.responsive.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/select2/select2.min.js' %}"></script>
+
+
+<script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
+
 
 <script src="{% static 'Hospital/assets/js/neon-calendar.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/neon-chat.js' %}"></script>

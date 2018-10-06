@@ -37,7 +37,7 @@
 <link rel="shortcut icon" href="uploads/favicon.png">
 <link rel="stylesheet" href="{% static 'Hospital/assets/css/font-icons/font-awesome/css/font-awesome.min.css' %}">
 
-
+<link rel="stylesheet" href="{% static 'Hospital/assets/login_page/css/style.css' %}">
 
 
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/vertical-timeline/css/component.css' %}">
@@ -69,6 +69,11 @@
 </style>
     </head>
     <body class="page-body">
+    <div class="preloader">
+        <div class="preloaderIn">
+            <img src="{% static 'Hospital/uploads/logo.png' %}" alt="">
+        </div>
+    </div>
         <div class="page-container             " >
             <div class="sidebar-menu">
    <header class="logo-env" >
@@ -76,7 +81,7 @@
         <!-- logo -->
         <div class="logo" style="">
             <a href="">
-                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:83px;"/>
+                <img src="{% static 'Hospital/uploads/logo.png' %}"  style="max-height:60px;"/>
             </a>
         </div>
 
@@ -185,12 +190,12 @@
             </a>
         </li>
         
-        <li class=" ">
+        {% comment %} <li class=" ">
             <a href="{% url 'Hospital:profileP' %}">
                 <i class="fa fa-user"></i>
                 <span>Profile</span>
             </a>
-        </li>
+        </li> {% endcomment %}
 
     </ul>
 
@@ -373,7 +378,7 @@
                     <h4 class="modal-title">TrueHealthcare</h4>
                 </div>
                 
-                <div class="modal-body" style="height:500px; overflow:auto;">
+                <div class="modal-body" style="height:450px; overflow:auto;">
 
                     
                 </div>
@@ -465,7 +470,7 @@
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2-bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'Hospital/assets/js/select2/select2.css' %}">
 
-<!-- Bottom Scripts -->
+<script src="{% static 'Hospital/assets/js/theme.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/gsap/main-gsap.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
 <script src="{% static 'Hospital/assets/js/bootstrap.js' %}"></script>

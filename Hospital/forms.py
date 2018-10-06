@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
-from . models import CustomUser,Department,Patient,Bed,Doctor,Role,Employee,Message
+from . models import CustomUser,Department,Patient,Bed,Doctor,Employee,Message
 
 from django.forms import ModelChoiceField,ModelForm,TextInput,Textarea
 
@@ -47,8 +47,8 @@ class CustomUserCreationFormDoctor(UserCreationForm):
         widget=forms.Select(attrs={'class' : 'form-control'}))
     username = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
-    email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     first_name = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
@@ -77,11 +77,10 @@ class CustomUserCreationFormDoctor(UserCreationForm):
         user = super().save(commit=False)
         user.is_doctor = True
         
-        r = Role(id=Role.DOCTOR)
-        r.save()
+
         user.save()    
         
-        user.role.add(r)  
+
 
         # user.role.set(range(Role.DOCTOR))     
         doctor = Doctor.objects.create(user=user)  
@@ -96,15 +95,15 @@ class CustomUserCreationFormNurse(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
-    email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     password1 = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','type' : 'password',}))   
     password2 = forms.CharField(max_length=30,
@@ -127,13 +126,10 @@ class CustomUserCreationFormNurse(UserCreationForm):
     def save(self):        
         user = super().save(commit=False)
         user.is_nurse = True
-        
-        r = Role(id=Role.NURSE)
-        
-        r.save()
+
         user.save()    
         
-        user.role.add(r) 
+
         Employee.objects.create(user=user)   
         return user
             
@@ -143,15 +139,15 @@ class CustomUserCreationFormPatient(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
-    email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     sex = forms.ChoiceField(choices=GENDER_CHOICES,
         widget=forms.Select(attrs={'class' : 'form-control'}))
     blood_group = forms.ChoiceField(choices=BLOOD_GROUPS,
@@ -177,10 +173,9 @@ class CustomUserCreationFormPatient(UserCreationForm):
     def save(self):        
         user = super().save(commit=False)
         user.is_patient = True
-        r = Role(id=Role.PATIENT)
-        r.save()
+
         user.save()    
-        user.role.add(r)  
+
         patient = Patient.objects.create(user=user)              
         return patient           
 
@@ -188,15 +183,15 @@ class CustomUserCreationFormReception(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     password1 = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','type' : 'password',}))    
     password2 = forms.CharField(max_length=30,
@@ -220,12 +215,9 @@ class CustomUserCreationFormReception(UserCreationForm):
         user = super().save(commit=False)
         user.is_receptionist = True
         
-        r = Role(id=Role.RECEPTIONIST)
-        
-        r.save()
+
         user.save()    
-        
-        user.role.add(r)  
+
         Employee.objects.create(user=user)  
         return user           
 
@@ -233,15 +225,15 @@ class CustomUserCreationFormLabaratorist(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     password1 = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','type' : 'password',}))   
     password2 = forms.CharField(max_length=30,
@@ -264,13 +256,9 @@ class CustomUserCreationFormLabaratorist(UserCreationForm):
     def save(self):        
         user = super().save(commit=False)
         user.is_labaratorist = True
-        
-        r = Role(id=Role.LABARATORIST)
-        
-        r.save()
+
         user.save()    
-        
-        user.role.add(r)  
+
         Employee.objects.create(user=user)  
         return user           
 
@@ -278,15 +266,15 @@ class CustomUserCreationFormPharmacist(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     password1 = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','type' : 'password',}))   
     password2 = forms.CharField(max_length=30,
@@ -310,10 +298,9 @@ class CustomUserCreationFormPharmacist(UserCreationForm):
     def save(self):        
         user = super().save(commit=False)
         user.is_pharmacist = True
-        r = Role(id=Role.PHARMACIST)
-        r.save()
+     
         user.save()    
-        user.role.add(r) 
+        
         Employee.objects.create(user=user)   
         return user 
 
@@ -322,15 +309,15 @@ class CustomUserCreationFormAccountant(UserCreationForm):
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     username = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     first_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     last_name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'})) 
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'})) 
     password1 = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','type' : 'password',}))   
     password2 = forms.CharField(max_length=30,
@@ -354,12 +341,10 @@ class CustomUserCreationFormAccountant(UserCreationForm):
         user = super().save(commit=False)
         user.is_accountant = True
         
-        r = Role(id=Role.ACCOUNTANT)
-        
-        r.save()
+   
         user.save()    
         
-        user.role.add(r)
+
         Employee.objects.create(user=user)    
 
         return user 
@@ -381,19 +366,19 @@ class CustomUserCreationFormAccountant(UserCreationForm):
 
 class addPatientForm(forms.Form):
     name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     address = forms.CharField(max_length=300,
         widget=forms.Textarea(attrs={'class' : 'form-control','rows':'4'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     sex = forms.ChoiceField(choices=GENDER_CHOICES,
         widget=forms.Select(attrs={'class' : 'form-control'}))
     dob = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     age = forms.IntegerField(
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     blood = forms.ChoiceField(choices=BLOOD_GROUPS,
         widget=forms.Select(attrs={'class' : 'form-control'}))
 
@@ -402,7 +387,7 @@ class addDepartmentForm(forms.Form):
         widget=forms.TextInput(attrs={'class' : 'form-control','placeholder':'Enter Department Name','autocomplete':'off'}))
     description = forms.CharField(max_length=200,
         widget=forms.Textarea(attrs={'class' : 'form-control','rows':'5','autocomplete':'off'}))
-    depticon = forms.ImageField(required=True)
+    
     # class Meta:
     #     model = Department
     #     fields = ['departmentname','description','image']
@@ -419,7 +404,7 @@ class addDoctorForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     departmentname = forms.ModelChoiceField(queryset=Department.objects.all(), to_field_name="departmentname",
         widget=forms.Select(attrs={'class' : 'form-control'}))
 
@@ -429,9 +414,9 @@ class addAccountantForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     address = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 class addNurseForm(forms.Form):
     name = forms.CharField(max_length=30,
@@ -439,9 +424,9 @@ class addNurseForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     address = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     
 class addPharmacistForm(forms.Form):
     name = forms.CharField(max_length=30,
@@ -449,9 +434,9 @@ class addPharmacistForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     address = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 class addLabaratoristForm(forms.Form):
     name = forms.CharField(max_length=30,
@@ -459,9 +444,9 @@ class addLabaratoristForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     address = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     
 
 class addReceptionistForm(forms.Form):
@@ -470,9 +455,9 @@ class addReceptionistForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     address = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 
 
@@ -486,7 +471,7 @@ class createPayrollForm(forms.Form):
     year = forms.ChoiceField(choices=YEAR_CHOICES,
         widget=forms.Select(attrs={'class' : 'form-control '}))
     basic = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control','id':'basic'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','id':'basic','autocomplete':'off'}))
     status = forms.ChoiceField(choices=PAYMENT_STATUS,
         widget=forms.Select(attrs={'class' : 'select form-control'}))
     
@@ -494,13 +479,13 @@ class createPayrollForm(forms.Form):
 class addBedForm(forms.Form):
     #choice
     number = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control','required':''}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','onkeypress':'return event.charCode >= 48 && event.charCode <= 57','autocomplete':'off'}))
  
     bed_type =  forms.ChoiceField(choices=BED_TYPES,
         widget=forms.Select(attrs={'class' : 'form-control '}))
     
     description = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     
 
 ############
@@ -528,6 +513,7 @@ class addPrescriptionForm(forms.Form):
             'class' : 'form-control datepicker',
             'data-format' : 'D, dd MM yyyy',
             'placeholder' : 'Appointment Date',
+            'autocomplete':'off'
             }))
     
     time = forms.TimeField(
@@ -539,35 +525,36 @@ class addPrescriptionForm(forms.Form):
             'data-default-time' : '00:05 AM',
             'data-show-meridian' : 'false',
             'data-minute-step' : '5',
+            'autocomplete':'off'
             }))
     case_history = forms.CharField(
-        widget=forms.Textarea(attrs={'class' : 'form-control html5editor'}))
+        widget=forms.Textarea(attrs={'class' : 'form-control ','rows':'4'}))
     medication = forms.CharField(
-        widget=forms.Textarea(attrs={'class' : 'form-control html5editor'}))
+        widget=forms.Textarea(attrs={'class' : 'form-control ','rows':'4'}))
     note = forms.CharField(
-        widget=forms.Textarea(attrs={'class' : 'form-control html5editor'}))
+        widget=forms.Textarea(attrs={'class' : 'form-control ','rows':'4'}))
 
 class addReportForm(forms.Form):
     type = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','placeholder':'Enter Full Name'}))
     description = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     #choice
     patient = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     date = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 class addDiagnosisReportForm(forms.Form):
     type = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control','placeholder':'Enter Full Name'}))
     description = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     #choice
     document = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     date = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 class addAppointmentForm(forms.Form):
     notify = forms.CharField(max_length=30,
@@ -581,6 +568,7 @@ class addAppointmentForm(forms.Form):
             'class' : 'form-control datepicker',
             'data-format' : 'D, dd MM yyyy',
             'placeholder' : 'Appointment Date',
+            'autocomplete':'off'
             }))
     
     time = forms.CharField(max_length=30,
@@ -592,6 +580,7 @@ class addAppointmentForm(forms.Form):
             'data-default-time' : '00:05 AM',
             'data-show-meridian' : 'false',
             'data-minute-step' : '5',
+            'autocomplete':'off'
             }))
 
 class applyAppointmentForm(forms.Form):    
@@ -600,6 +589,7 @@ class applyAppointmentForm(forms.Form):
             'class' : 'form-control datepicker',
             'data-format' : 'D, dd MM yyyy',
             'placeholder' : 'Appointment Date',
+            'autocomplete':'off'
             }))
     
     doctor = forms.ModelChoiceField(queryset=Doctor.objects.all(),
@@ -631,10 +621,10 @@ class addInvoiceForm(forms.Form):
             }))
     
     vatpercent = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
     discount = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
 
 
     status = forms.ChoiceField(choices=PAYMENT_STATUS,
@@ -654,19 +644,19 @@ class addInvoiceForm(forms.Form):
 
 class addBloodDonorForm(forms.Form):
     name = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class' : 'form-control'}))
     address = forms.CharField(max_length=300,
         widget=forms.Textarea(attrs={'class' : 'form-control','rows':'4'}))
     phone = forms.CharField(max_length=30,
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     sex = forms.ChoiceField(choices=GENDER_CHOICES,
         widget=forms.Select(attrs={'class' : 'form-control'}))
     last_donation = forms.CharField(max_length=30,
         widget=forms.TextInput(attrs={'class' : 'form-control datepicker'}))
     age = forms.IntegerField(
-        widget=forms.TextInput(attrs={'class' : 'form-control'}))
+        widget=forms.TextInput(attrs={'class' : 'form-control','autocomplete':'off'}))
     blood = forms.ChoiceField(choices=BLOOD_GROUPS,
         widget=forms.Select(attrs={'class' : 'form-control'}))
        

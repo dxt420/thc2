@@ -8401,7 +8401,7 @@ button.close {
  
 }
 .modal-open .page-container {
-  padding-right: 15px;
+  padding-right: 0px;
 }
 .modal {
   display: none;
